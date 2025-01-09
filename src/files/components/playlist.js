@@ -1,19 +1,13 @@
 import React from 'react';
+import Tracklist from '../containers/tracklist';
 
 function PLaylist(props) {
-
-    const playlistSongs = props.selected;
-
+    console.log(props.selected);
     return (
-        <div>
-            {playlistSongs.map(track => {return (
-                <div style={{color: "green"}}>
-                    <h3>{track.title}</h3>
-                    <h4>{track.artist}</h4>
-                    <h5>{track.album}</h5>
-                </div>
-            )})}
-        </div>
+            <div>
+                <input type="text"  placeholder="New Playlist" onChange />
+                <Tracklist tracklist={props.selected} removeClick={props.removeClick} />
+            </div>
     )
 };
 

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SearchResults from './searchResults';
+import PLaylist from '../components/playlist';
+import AddToSpotifyButton from '../components/addToSpotifyButton';
 
 function GetDataFromAPI() {
     const tracklist = [
@@ -20,10 +22,23 @@ function GetDataFromAPI() {
             album: "Medium album"
            } 
     ];
+       const [selected, setSelected] = useState([]);
+            
+        function handleSelectionClick(newSelectedTrack) {
+            setSelected([...selected, newSelectedTrack])
+        };
 
+        function handleRemoveClick(removedTrack) {
+            setSelected((selected) => {return selected.filter(track => track!==removedTrack)})
+        };
+    
     return (
         <>
-            <SearchResults findedResults={tracklist} />
+            <SearchResults searchResults={tracklist} selectionClick={handleSelectionClick}/>
+            <div>
+                <PLaylist removeClick={handleRemoveClick} selected={selected}/>
+                <AddToSpotifyButton />
+            </div>
         </>
     )
 };

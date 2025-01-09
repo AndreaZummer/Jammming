@@ -1,21 +1,20 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 function Track(props) {
 
-    const [selected, setSelected]= useState(false);
-
     function handleRemove() {
-        /*doplnit odstranenie z PL*/
-        setSelected(false);
+        const removedTrack=props.track;
+        props.removeClick(removedTrack);
+        /*opravit*/
     };
 
     function handleAdd() {
-        /*doplnit pridanie na PL*/
-        setSelected(true);
+        const newSelectedTrack = props.track;
+        props.selectionClick(newSelectedTrack);
     };
 
     function addOrRemoveButton () {
-        if (selected) {
+        if (props.removeClick) {
             return (
                 <button onClick={handleRemove}><span>-</span> Remove from Playlist</button>
             )}
