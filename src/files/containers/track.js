@@ -1,25 +1,37 @@
 import React,{useState} from 'react';
-import Playlist from '../components/playlist';
 
 function Track(props) {
 
-    const [ selected, setSelected] = useState([]);
-        
-    function handleSelectionClick() {
-        setSelected((selectedTracks) => [...selectedTracks,props.track])
+    const [selected, setSelected]= useState(false);
+
+    function handleRemove() {
+        /*doplnit odstranenie z PL*/
+        setSelected(false);
+    };
+
+    function handleAdd() {
+        /*doplnit pridanie na PL*/
+        setSelected(true);
+    };
+
+    function addOrRemoveButton () {
+        if (selected) {
+            return (
+                <button onClick={handleRemove}><span>-</span> Remove from Playlist</button>
+            )}
+        else {
+            return (
+                <button onClick={handleAdd}><span>+</span> Add to Playlist</button>
+            )
+        }
     };
 
     return (
         <div>
-            <div>
                 <h3>{props.track.title}</h3>
                 <h4>{props.track.artist}</h4>
                 <h5>{props.track.album}</h5>
-                <button onClick={handleSelectionClick}><span>+</span>Add to Playlist</button>
-            </div>
-            <div>
-                <Playlist selected={selected} />
-            </div>
+                {addOrRemoveButton()}
         </div>
     )
 };
