@@ -1,14 +1,20 @@
 import React from 'react';
-import Track from './track';
-import AddToSpotifyButton from './addToSpotifyButton';
 
 function PLaylist(props) {
+
+    const playlistSongs = props.selected;
+
     return (
         <div>
-            <input type="text" value={playlistName} placeholder="New Playlist" onChange />
-            {/* len tie co su vybrane */}
-            <Track selected={true} />
-            <AddToSpotifyButton />
+            {playlistSongs.map(track => {return (
+                <div style={{color: "green"}}>
+                    <h3>{track.title}</h3>
+                    <h4>{track.artist}</h4>
+                    <h5>{track.album}</h5>
+                </div>
+            )})}
         </div>
     )
-}
+};
+
+export default PLaylist;
