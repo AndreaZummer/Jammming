@@ -1,7 +1,8 @@
 import React from "react";
 
-function SearchButton() {
-    return <button> Search </button>
+function SearchButton(props) {
+    
+    return <button onClick={props.onClick}> Search </button>
 };
 
 export default SearchButton;
