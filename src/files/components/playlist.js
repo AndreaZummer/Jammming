@@ -1,11 +1,18 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Tracklist from '../containers/tracklist';
 
 function PLaylist(props) {
-
+    
     const [name, setName]=useState('');
     const [playlistName, setPlaylistName]=useState('');
     const [disabled, setDisabled] = useState(false);
+
+    useEffect(
+        () => {
+        const uriList = props.selected.map(track => track.title);
+        }, [props.selected]
+       );
+
 
     function namingPlaylist(event) {
         setName(event.target.value);
@@ -32,7 +39,6 @@ function PLaylist(props) {
                 <h2>{playlistName}</h2>
                 {playlistName && 
                     <button onClick={handleChangingNameClick}> Change Playlist Name</button>}
-
                 <Tracklist tracklist={props.selected} removeClick={props.removeClick} />
             </div>
     )
