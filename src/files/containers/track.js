@@ -27,9 +27,9 @@ function Track(props) {
 
     return (
         <div>
-                <h3>{props.track.title}</h3>
-                <h4>{props.track.artist}</h4>
-                <h5>{props.track.album}</h5>
+                <h3>{props.track.name}</h3>
+                {props.track.artists.map((artist) => <h4>{artist.name}</h4>)}
+                <h5>{props.track.album.name}</h5>
                 {addOrRemoveButton()}
         </div>
     )

@@ -9,9 +9,9 @@ function PLaylist(props) {
 
     useEffect(
         () => {
-        const uriList = props.selected.map(track => track.title);
+            const uriList = props.selected.map(track => track.uri);
         }, [props.selected]
-       );
+    );
 
 
     function namingPlaylist(event) {
@@ -39,9 +39,10 @@ function PLaylist(props) {
                 <h2>{playlistName}</h2>
                 {playlistName && 
                     <button onClick={handleChangingNameClick}> Change Playlist Name</button>}
-                <Tracklist tracklist={props.selected} removeClick={props.removeClick} />
+                <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
             </div>
     )
 };
 
 export default PLaylist;
+// export {uriList};

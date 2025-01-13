@@ -1,11 +1,12 @@
 import React from 'react';
-import Tracklist from './tracklist';
-// import {search} from './searchBar';
+import Track from './track';
 
 function SearchResults(props) {
     return (
         <div>
-            <Tracklist tracklist={props.searchResults} selectionClick={props.selectionClick}/>
+            {props.searchResults.map((track,index) => { return (
+                <Track track={track} key={index} selectionClick={props.selectionClick}/>
+            )})}
         </div>
     )
 };

@@ -1,12 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import React,{useState} from 'react';
-import Searching from './files/containers/searching';
 import SearchBar from './files/containers/searchBar';
-import SearchResults from './files/containers/searchResults';
-import PLaylist from './files/components/playlist';
-import AddToSpotifyButton from './files/components/addToSpotifyButton';
 import WelcomeBanner from './files/components/welcomeBanner';
+
 
 function App() {
   /*const tracklist = [
@@ -31,42 +27,21 @@ function App() {
               uri: "gfd82"
              } 
       ];*/
-  let tracklist=[];
    
-  const [selected, setSelected] = useState([]);
   const [searching, setSearching] = useState(false);
 
   function handleSearching() {
     setSearching(true);
-  }
-              
-  function handleSelectionClick(newSelectedTrack) {
-    setSelected([...selected, newSelectedTrack])
-  };
-  
-  function handleRemoveClick(removedTrack) {
-    setSelected((selected) => {return selected.filter(track => track!==removedTrack)})
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>JAMMMING</h1>
-        {!searching? 
-          (
-            <div>
-                <WelcomeBanner />
-                <SearchBar />
-            </div>
-          ):
-          (
-          <div>
-              <SearchBar />
-              <SearchResults searchResults={tracklist} selectionClick={handleSelectionClick}/>
-              <PLaylist removeClick={handleRemoveClick} selected={selected}/>
-              <AddToSpotifyButton />
-          </div>
-        )}
+        <div>
+          {!searching && <WelcomeBanner />}
+          <SearchBar handleSearching={handleSearching} searching={searching}/>
+        </div>
       </header>
     </div>
   );

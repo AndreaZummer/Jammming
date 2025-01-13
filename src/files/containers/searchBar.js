@@ -37,7 +37,7 @@ function SearchBar(props) {
         <div>
             <div>
                 <input type="text" placeholder='Song Title' value={search} onChange={handleChange}/>
-                <SearchButton onClick=/*{() => */{handleSearchClick/*; manageStatesOnClick();}*/}/>
+                <SearchButton onClick={handleSearchClick}/>
             </div>
             {props.searching && (
             <div>
