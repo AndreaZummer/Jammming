@@ -25,7 +25,7 @@ async function getAccessToken() {
 };
 
 async function getSearchResults(searchedText) {
-  const url=`https://api.spotify.com/v1/search?q=${searchedText}&type=track,artist&market=SK&limit=20`;
+  const url='https://api.spotify.com/v1/search?q='+searchedText+'&type=track&market=SK&limit=20';
   const token = await getAccessToken();
 
   try {
@@ -38,7 +38,7 @@ async function getSearchResults(searchedText) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     };
     const body = await response.json();
-    const tracklist = body.tracks;
+    const tracklist = body.tracks.items;
     return tracklist;
   }
   catch(error) {
@@ -56,17 +56,18 @@ async function addPlaylistToSpotify(playlistName) {
           'Authorization':'Bearer ' + token,
           'Content-Type': 'application/json',
         },
-        body: {
+        body: JSON.stringify ({
           "name": playlistName,
           "description": "Custom Playlist",
           "public": false
-        }
+        })
       });
     if (!response.ok) {
       throw new Error (`HTTP error! Status: ${response.status}`);
     }
     const body = await response.json();
     const playlistID = body.id;
+    console.log(playlistID);
     return playlistID;
   }
   catch(error) {
@@ -76,7 +77,7 @@ async function addPlaylistToSpotify(playlistName) {
 
 async function addTracksToPlaylist(uriList,playlistName) {
   const token= await getAccessToken();
-  const playlistID=addPlaylistToSpotify(playlistName,token);
+  const playlistID= await addPlaylistToSpotify(playlistName, token);
 
   try {
     const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
