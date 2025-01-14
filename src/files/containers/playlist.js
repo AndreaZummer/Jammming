@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import Tracklist from '../containers/tracklist';
-import AddToSpotifyButton from './addToSpotifyButton';
+import Tracklist from '../components/tracklist';
+import AddToSpotifyButton from '../components/addToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
 
 function PLaylist(props) {
