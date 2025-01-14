@@ -1,7 +1,12 @@
 import React from "react";
 
 function AddToSpotifyButton(props) {
-    return <button onClick={props.onAdd}>Add Playlist To Spotify</button>
+
+    async function handleAddClick() {
+        await props.onAdd();
+        props.refreshing();
+    }
+    return <button onClick={handleAddClick}>Add Playlist To Spotify</button>
 };
 
 export default AddToSpotifyButton; 

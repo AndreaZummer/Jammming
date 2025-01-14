@@ -9,6 +9,12 @@ function SearchBar(props) {
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState(null);
     const [selected, setSelected] = useState([]);
+
+    function refreshing() {
+        setSearchResults(null);
+        setSelected([]);
+        props.handleReset();
+    }
                   
     function handleSelectionClick(newSelectedTrack) {
         setSelected([...selected, newSelectedTrack])
@@ -37,7 +43,7 @@ function SearchBar(props) {
             {props.searching && (
             <div>
                 <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
-                <PLaylist removeClick={handleRemoveClick} selected={selected}/>
+                <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing}/>
             </div>
             )}
         </div>

@@ -17,23 +17,10 @@ async function getAccessToken() {
   var access_token = params.access_token,
       state = params.state,
       storedState = localStorage.getItem(stateKey);
-  console.log(storedState);
   if (access_token && (state == null || state !== storedState)) {
     alert('There was an error during the authentication');
   } else {
       localStorage.removeItem(stateKey);
-      if (access_token) {
-        const response = await fetch('https://api.spotify.com/v1/me', {
-          headers: {
-            'Authorization': 'Bearer ' + access_token
-          }
-      })
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        } else {
-          await response.json();
-        }
-      }
     };
 
   function requestForToken() {
@@ -137,7 +124,6 @@ async function addPlaylistToSpotify(playlistName) {
     }
     const body = await response.json();
     const playlistID = body.id;
-    console.log(body);
     return playlistID;
   }
   catch(error) {

@@ -46,7 +46,7 @@ function PLaylist(props) {
             {playlistName && 
                 <button onClick={handleChangingNameClick}> Change Playlist Name</button>}
             <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
-            <AddToSpotifyButton onAdd={addToSpotify}/>
+            <AddToSpotifyButton onAdd={addToSpotify} refreshing={props.refreshing}/>
         </div>
     )
 };

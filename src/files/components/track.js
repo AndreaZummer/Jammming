@@ -24,7 +24,7 @@ function Track(props) {
         }
     };
     return (
-        <div key={props.track.uri}>
+        <div>
             <h3>{props.track.name}</h3>
             {props.track.artists.map((artist) => <h4>{artist.name}</h4>)}
             <h5>{props.track.album.name}</h5>
