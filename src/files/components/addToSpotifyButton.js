@@ -1,13 +1,7 @@
 import React from "react";
-import { uriList } from "./playlist";
 
 function AddToSpotifyButton(props) {
-
-    function handleAddClick(event) {
-            
-    }
-    
-    return <button onClick={handleAddClick}>Add Playlist To Spotify</button>
+    return <button onClick={props.onAdd}>Add Playlist To Spotify</button>
 };
 
-export default AddToSpotifyButton;
+export default AddToSpotifyButton; 

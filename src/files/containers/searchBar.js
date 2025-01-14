@@ -1,7 +1,6 @@
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import SearchButton from '../components/searchButton';
 import SearchResults from './searchResults';
-import AddToSpotifyButton from '../components/addToSpotifyButton';
 import PLaylist from '../components/playlist';
 import { getSearchResults} from '../utilities/utilities';
 
@@ -29,10 +28,6 @@ function SearchBar(props) {
         props.handleSearching();
     };
 
-    useEffect(() => {
-        console.log('Updated searchResults:', searchResults);
-    }, [searchResults]);
-
     return (
         <div>
             <div>
@@ -43,7 +38,6 @@ function SearchBar(props) {
             <div>
                 <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
                 <PLaylist removeClick={handleRemoveClick} selected={selected}/>
-                <AddToSpotifyButton />
             </div>
             )}
         </div>

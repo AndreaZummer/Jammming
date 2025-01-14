@@ -1,82 +1,108 @@
-import { getAccessTokenImplict } from "./login";
+// Request for Access Token using Implicit Grant Flow
+
+async function getAccessToken() {
+  let stateKey = 'spotify_auth_state';
+
+  function getHashParams() {
+    let hashParams = {};
+    let e, r = /([^&;=]+)=?([^&;]*)/g,
+      q = window.location.hash.substring(1);
+    while ( e = r.exec(q)) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
+  };
+
+  const params = getHashParams();
+  var access_token = params.access_token,
+      state = params.state,
+      storedState = localStorage.getItem(stateKey);
+  console.log(storedState);
+  if (access_token && (state == null || state !== storedState)) {
+    alert('There was an error during the authentication');
+  } else {
+      localStorage.removeItem(stateKey);
+      if (access_token) {
+        const response = await fetch('https://api.spotify.com/v1/me', {
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          }
+      })
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        } else {
+          await response.json();
+        }
+      }
+    };
+
+  function requestForToken() {
+
+    const client_id = '32fd7115babc4ea9a080fde3bb3d88df';
+    const redirect_uri = 'http://localhost:3000';
+    let stateKey = 'spotify_auth_state';
+
+    function generateRandomString(length) {
+      let text = '';
+      const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+      for (let i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
+    };
+
+    let state = generateRandomString(16);
+
+    localStorage.setItem(stateKey, state);
+    const scope = 'user-read-private user-read-email';
+
+    let url = 'https://accounts.spotify.com/authorize';
+    url += '?response_type=token';
+    url += '&client_id=' + encodeURIComponent(client_id);
+    url += '&scope=' + encodeURIComponent(scope);
+    url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+    url += '&state=' + encodeURIComponent(state);
+
+    window.location = url;
+  }
+  requestForToken();
+};
+// Checks if user is logged in
 
 async function logginChecker() {
   const clientID = "32fd7115babc4ea9a080fde3bb3d88df";
   const redirect_uri = 'http://localhost:3000';
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
+  const params = new URLSearchParams(window.location.hash.substring(1));
+  const accessToken = params.get("access_token");
 
-  if (!code) {
-      await getAccessTokenImplict();
-  } else {
-      const accessToken = await getAccessToken(clientID, code);
-      const profile = await getProfile(accessToken);
-      // populateUI(profile);
-  };
+  if (!accessToken) {
+      await getAccessToken();
+  }; 
 
-  async function getAccessToken(clientID, code) {
-    const params = new URLSearchParams();
-      params.append("client_id", clientID);
-      params.append("grant_type", "authorization_code");
-      params.append("code", code);
-      params.append("redirect_uri", redirect_uri);
-
-      const response = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params
-      });
-
-    const body = await response.json();
-    console.log(body.access_token)
-    return body.access_token;
-  }
+  return accessToken;
 };
-/*async function getAccessToken() {
-  const authOptions = {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret),
-      'Content-Type': 'application/x-www-form-urlencoded', 
-    },
-    body: 'grant_type=client_credentials' 
-  };
-  try {
-    const scope = 'user-read-private user-read-email';
-    const response = await fetch('https://accounts.spotify.com/api/token?scope=' + encodeURIComponent(scope), authOptions);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      };
-    const body = await  response.json();
-    const token = body.access_token;
-    return token;
-  }
-  catch(error) {
-      console.log("Error fetching token:", error);
-  };
-};*/
 
-async function getProfile(token) {
-
+async function getProfile() {
+  const accessToken = logginChecker();
   const response = await fetch('https://api.spotify.com/v1/me', {
     headers: {
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + accessToken
     }
   });
-
+  
   const data = await response.json();
-  console.log(data.user_id);
-  return data;
+  return data.id;
 };
 
 async function getSearchResults(searchedText) {
   const url='https://api.spotify.com/v1/search?q='+searchedText+'&type=track&market=SK&limit=20';
-  // const token = await getAccessToken();
+  const accessToken = await logginChecker();
 
   try {
     const response = await fetch(url,{
       headers: {
-        // 'Authorization': 'Bearer '+ token,
+        'Authorization': 'Bearer '+ accessToken,
       }
     });
    if (!response.ok) {
@@ -88,16 +114,17 @@ async function getSearchResults(searchedText) {
   }
   catch(error) {
     console.log("Error getting results:", error);
-  };
+  }
 };
 
-async function addPlaylistToSpotify(playlistName,token, userID) {
-
+async function addPlaylistToSpotify(playlistName) {
+  const accessToken = await logginChecker();
+  const userID = await getProfile();
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
         method:'POST',
         headers: {
-          'Authorization':'Bearer ' + token,
+          'Authorization':'Bearer ' + accessToken,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify ({
@@ -111,7 +138,6 @@ async function addPlaylistToSpotify(playlistName,token, userID) {
     }
     const body = await response.json();
     const playlistID = body.id;
-    console.log(playlistID);
     return playlistID;
   }
   catch(error) {
@@ -120,15 +146,15 @@ async function addPlaylistToSpotify(playlistName,token, userID) {
 };
 
 async function addTracksToPlaylist(uriList,playlistName) {
-  const token= await getAccessTokenImplict();
-  const userID = await getProfile(token);
-  const playlistID= await addPlaylistToSpotify(playlistName, token, userID);
+  const accessToken= await logginChecker();
+  const userID = await getProfile(accessToken);
+  const playlistID= await addPlaylistToSpotify(playlistName);
 
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
       method:'POST',
       headers: {
-        'Authorization':'Bearer ' + token,
+        'Authorization':'Bearer ' + accessToken,
         'Content-Type': 'application/json',
       },
       body: {
@@ -146,4 +172,4 @@ async function addTracksToPlaylist(uriList,playlistName) {
   };
 };
 
-export { getSearchResults, addPlaylistToSpotify, addTracksToPlaylist, getProfile};
+export {getSearchResults, addTracksToPlaylist, getProfile};

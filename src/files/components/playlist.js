@@ -1,18 +1,20 @@
 import React,{useState,useEffect} from 'react';
 import Tracklist from '../containers/tracklist';
+import AddToSpotifyButton from './addToSpotifyButton';
+import {addTracksToPlaylist} from '../utilities/utilities';
 
 function PLaylist(props) {
     
     const [name, setName]=useState('');
     const [playlistName, setPlaylistName]=useState('');
     const [disabled, setDisabled] = useState(false);
+    const [uriList, setUriLits] = useState([]);
 
     useEffect(
         () => {
-            const uriList = props.selected.map(track => track.uri);
+            setUriLits(props.selected.map(track => track.uri));
         }, [props.selected]
     );
-
 
     function namingPlaylist(event) {
         setName(event.target.value);
@@ -25,24 +27,28 @@ function PLaylist(props) {
         setDisabled(true);
     };
 
-    function handleChangingNameClick(event) {
+    function handleChangingNameClick() {
       setName(playlistName);
       setPlaylistName('');
       setDisabled(false);  
     };
 
+    async function addToSpotify() {
+        await addTracksToPlaylist(uriList,playlistName);
+    };
+
     return (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input type="text"  placeholder="New Playlist" onChange={namingPlaylist} value={name} disabled={disabled}/>
-                </form>
-                <h2>{playlistName}</h2>
-                {playlistName && 
-                    <button onClick={handleChangingNameClick}> Change Playlist Name</button>}
-                <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
-            </div>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input type="text"  placeholder="New Playlist" onChange={namingPlaylist} value={name} disabled={disabled}/>
+            </form>
+            <h2>{playlistName}</h2>
+            {playlistName && 
+                <button onClick={handleChangingNameClick}> Change Playlist Name</button>}
+            <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
+            <AddToSpotifyButton onAdd={addToSpotify}/>
+        </div>
     )
 };
 
 export default PLaylist;
-// export {uriList};

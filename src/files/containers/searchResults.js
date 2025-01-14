@@ -5,7 +5,7 @@ function SearchResults(props) {
     return (
         <div>
             {props.searchResults.map((track,index) => { return (
-                <Track track={track} key={index} selectionClick={props.selectionClick}/>
+                <Track track={track} key={`track${index}`} selectionClick={props.selectionClick}/>
             )})}
         </div>
     )

@@ -1,35 +1,15 @@
 import './App.css';
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import SearchBar from './files/containers/searchBar';
 import WelcomeBanner from './files/components/welcomeBanner';
-
+import { getProfile} from './files/utilities/utilities';
 
 function App() {
-  /*const tracklist = [
-    {title: 'Hello',
-           artist: "Adele",
-           album: "Hello from behind",
-          uri: "3382sf5dg1vxf"
-          }, 
-          {title: "Killing",
-              artist: "Cher",
-              album: "Mastermind",
-              uri: "151sf5dg1"
-             }, 
-             {title: "Easy",
-              artist: "Easy-artist",
-              album: "Easy-album",
-              uri: "bdf2g31rd521"
-             }, 
-             {title: "Medium",
-              artist: "Medium-artist",
-              album: "Medium album",
-              uri: "gfd82"
-             } 
-      ];*/
-   
+  useEffect (()=> {
+    getProfile();
+  }, []);
+  
   const [searching, setSearching] = useState(false);
-
   function handleSearching() {
     setSearching(true);
   };
