@@ -55,7 +55,7 @@ async function getAccessToken() {
     let state = generateRandomString(16);
 
     localStorage.setItem(stateKey, state);
-    const scope = 'user-read-private user-read-email';
+    const scope = 'playlist-modify-private';
 
     let url = 'https://accounts.spotify.com/authorize';
     url += '?response_type=token';
@@ -71,8 +71,6 @@ async function getAccessToken() {
 // Checks if user is logged in
 
 async function logginChecker() {
-  const clientID = "32fd7115babc4ea9a080fde3bb3d88df";
-  const redirect_uri = 'http://localhost:3000';
   const params = new URLSearchParams(window.location.hash.substring(1));
   const accessToken = params.get("access_token");
 
@@ -84,7 +82,7 @@ async function logginChecker() {
 };
 
 async function getProfile() {
-  const accessToken = logginChecker();
+  const accessToken = await logginChecker();
   const response = await fetch('https://api.spotify.com/v1/me', {
     headers: {
       'Authorization': 'Bearer ' + accessToken
@@ -120,6 +118,7 @@ async function getSearchResults(searchedText) {
 async function addPlaylistToSpotify(playlistName) {
   const accessToken = await logginChecker();
   const userID = await getProfile();
+ 
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
         method:'POST',
@@ -127,7 +126,7 @@ async function addPlaylistToSpotify(playlistName) {
           'Authorization':'Bearer ' + accessToken,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify ({
+        body: JSON.stringify({
           "name": playlistName,
           "description": "Custom Playlist",
           "public": false
@@ -138,6 +137,7 @@ async function addPlaylistToSpotify(playlistName) {
     }
     const body = await response.json();
     const playlistID = body.id;
+    console.log(body);
     return playlistID;
   }
   catch(error) {
@@ -157,10 +157,10 @@ async function addTracksToPlaylist(uriList,playlistName) {
         'Authorization':'Bearer ' + accessToken,
         'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         "uris": uriList,
         "position": 0,
-      }
+      })
     })
     if (!response.ok) {
       throw new Error (`HTTP error! Status: ${response.status}`);
@@ -172,4 +172,4 @@ async function addTracksToPlaylist(uriList,playlistName) {
   };
 };
 
-export {getSearchResults, addTracksToPlaylist, getProfile};
+export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify};

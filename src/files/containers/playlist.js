@@ -6,7 +6,7 @@ import {addTracksToPlaylist} from '../utilities/utilities';
 function PLaylist(props) {
     
     const [name, setName]=useState('');
-    const [playlistName, setPlaylistName]=useState('');
+    const [playlistName, setPlaylistName]=useState('New Playlist');
     const [disabled, setDisabled] = useState(false);
     const [uriList, setUriLits] = useState([]);
 
@@ -40,7 +40,7 @@ function PLaylist(props) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input type="text"  placeholder="New Playlist" onChange={namingPlaylist} value={name} disabled={disabled}/>
+                <input type="text" placeholder="New Playlist" onChange={namingPlaylist} value={name} disabled={disabled}/>
             </form>
             <h2>{playlistName}</h2>
             {playlistName && 

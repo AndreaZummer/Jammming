@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import SearchButton from '../components/searchButton';
-import SearchResults from './searchResults';
-import PLaylist from '../components/playlist';
+import SearchResults from '../components/searchResults';
+import PLaylist from './playlist';
 import { getSearchResults} from '../utilities/utilities';
 
 function SearchBar(props) {
@@ -31,7 +31,7 @@ function SearchBar(props) {
     return (
         <div>
             <div>
-                <input type="text" placeholder='Song Title' value={search} onChange={handleChange}/>
+                <input type="text" placeholder='Song Title / Artist' value={search} onChange={handleChange}/>
                 <SearchButton onClick={handleSearchClick}/>
             </div>
             {props.searching && (
