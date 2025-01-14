@@ -1,7 +1,38 @@
-var client_id = '32fd7115babc4ea9a080fde3bb3d88df';
-var client_secret = '05962b9798b94e028f49913cae8c608b';
+import { getAccessTokenImplict } from "./login";
 
-async function getAccessToken() {
+async function logginChecker() {
+  const clientID = "32fd7115babc4ea9a080fde3bb3d88df";
+  const redirect_uri = 'http://localhost:3000';
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+
+  if (!code) {
+      await getAccessTokenImplict();
+  } else {
+      const accessToken = await getAccessToken(clientID, code);
+      const profile = await getProfile(accessToken);
+      // populateUI(profile);
+  };
+
+  async function getAccessToken(clientID, code) {
+    const params = new URLSearchParams();
+      params.append("client_id", clientID);
+      params.append("grant_type", "authorization_code");
+      params.append("code", code);
+      params.append("redirect_uri", redirect_uri);
+
+      const response = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params
+      });
+
+    const body = await response.json();
+    console.log(body.access_token)
+    return body.access_token;
+  }
+};
+/*async function getAccessToken() {
   const authOptions = {
     method: 'POST',
     headers: {
@@ -11,7 +42,8 @@ async function getAccessToken() {
     body: 'grant_type=client_credentials' 
   };
   try {
-    const response = await fetch('https://accounts.spotify.com/api/token', authOptions);
+    const scope = 'user-read-private user-read-email';
+    const response = await fetch('https://accounts.spotify.com/api/token?scope=' + encodeURIComponent(scope), authOptions);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       };
@@ -22,16 +54,29 @@ async function getAccessToken() {
   catch(error) {
       console.log("Error fetching token:", error);
   };
+};*/
+
+async function getProfile(token) {
+
+  const response = await fetch('https://api.spotify.com/v1/me', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  });
+
+  const data = await response.json();
+  console.log(data.user_id);
+  return data;
 };
 
 async function getSearchResults(searchedText) {
   const url='https://api.spotify.com/v1/search?q='+searchedText+'&type=track&market=SK&limit=20';
-  const token = await getAccessToken();
+  // const token = await getAccessToken();
 
   try {
     const response = await fetch(url,{
       headers: {
-        'Authorization': 'Bearer '+ token,
+        // 'Authorization': 'Bearer '+ token,
       }
     });
    if (!response.ok) {
@@ -46,11 +91,10 @@ async function getSearchResults(searchedText) {
   };
 };
 
-async function addPlaylistToSpotify(playlistName) {
-  const token= await getAccessToken();
+async function addPlaylistToSpotify(playlistName,token, userID) {
 
   try {
-    const response = await fetch('https://api.spotify.com/v1/users/32fd7115babc4ea9a080fde3bb3d88df/playlists', {
+    const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
         method:'POST',
         headers: {
           'Authorization':'Bearer ' + token,
@@ -76,11 +120,12 @@ async function addPlaylistToSpotify(playlistName) {
 };
 
 async function addTracksToPlaylist(uriList,playlistName) {
-  const token= await getAccessToken();
-  const playlistID= await addPlaylistToSpotify(playlistName, token);
+  const token= await getAccessTokenImplict();
+  const userID = await getProfile(token);
+  const playlistID= await addPlaylistToSpotify(playlistName, token, userID);
 
   try {
-    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
+    const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
       method:'POST',
       headers: {
         'Authorization':'Bearer ' + token,
@@ -101,4 +146,4 @@ async function addTracksToPlaylist(uriList,playlistName) {
   };
 };
 
-export {getAccessToken, getSearchResults, addPlaylistToSpotify, addTracksToPlaylist};
+export { getSearchResults, addPlaylistToSpotify, addTracksToPlaylist, getProfile};
