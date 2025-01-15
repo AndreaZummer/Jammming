@@ -23,12 +23,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>JAMMMING</h1>
-        <div>
+      </header>
+      <main>
+        <div className='searching'>
           {!searching && <WelcomeBanner />}
           <SearchBar handleSearching={handleSearching} searching={searching} handleReset={handleReset}/>
         </div>
           {reset && <h2>Playlist successfully added to Spotify!</h2>}
-      </header>
+        </main>
     </div>
   );
 }

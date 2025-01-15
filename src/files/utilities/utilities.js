@@ -54,6 +54,8 @@ async function getAccessToken() {
     window.location = url;
   }
   requestForToken();
+  const expirationTime = Date.now() + 3600000;
+  localStorage.setItem('expiration_time', expirationTime);
 };
 // Checks if user is logged in
 
@@ -64,7 +66,12 @@ async function logginChecker() {
   if (!accessToken) {
       await getAccessToken();
   }; 
-
+  if (accessToken) {
+    const expirationTime=localStorage.getItem('expiration_time');
+    if(expirationTime <= Date.now()) {
+      await getAccessToken();
+    }
+  }
   return accessToken;
 };
 
