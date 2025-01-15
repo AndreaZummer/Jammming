@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
-import SearchButton from '../components/searchButton';
 import SearchResults from '../components/searchResults';
 import PLaylist from './playlist';
 import { getSearchResults} from '../utilities/utilities';
+import '../styles/searchBar.css';
 
 function SearchBar(props) {
 
@@ -35,10 +35,10 @@ function SearchBar(props) {
     };
 
     return (
-        <div>
-            <div>
+        <div className='searchBar'>
+            <div id='searchBarAfter'>
                 <input type="text" placeholder='Song Title / Artist' value={search} onChange={handleChange}/>
-                <SearchButton onClick={handleSearchClick}/>
+                <button onClick={handleSearchClick}> Search </button>
             </div>
             {props.searching && (
             <div>

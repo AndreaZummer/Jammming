@@ -1,0 +1,16 @@
+.welcomeBanner {
+    width: 38%;
+    padding: 3%;
+    border: 2px solid #ffffffcf;
+    background-color: #aeeddac7;
+}
+
+.welcomeBanner h2 {
+    color: #313b37;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.welcomeBanner p {
+    padding: 3% 12%;
+}

@@ -1,0 +1,17 @@
+.track {
+    border: 1.5px solid #000;
+    border-radius: 3px;
+    background-color: #b5672a;
+    height: 8rem;
+    margin: 5%;
+    padding: 5%;
+    display: flex;
+    flex-flow: column;
+}
+
+.add {
+    position: absolut;
+    width: 10%;
+}
+
+.track {}

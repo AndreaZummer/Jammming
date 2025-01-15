@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/track.css';
 
 function Track(props) {
 
@@ -15,18 +16,27 @@ function Track(props) {
     function addOrRemoveButton () {
         if (props.removeClick) {
             return (
-                <button onClick={handleRemove}><span>-</span> Remove from Playlist</button>
+                <button className='add' onClick={handleRemove}><span>-</span> Remove</button>
             )}
         else {
             return (
-                <button onClick={handleAdd}><span>+</span> Add to Playlist</button>
+                <button className='add' onClick={handleAdd}><span>+</span> Add</button>
             )
         }
     };
+
+    function addArtists() {
+        const artists = props.track.artists.map(
+            (artist,index) => {if (index<3) { return artist.name}}
+        );
+
+        return artists.join(', ');
+    };
+
     return (
-        <div>
+        <div className='track'>
             <h3>{props.track.name}</h3>
-            {props.track.artists.map((artist) => <h4>{artist.name}</h4>)}
+            <h4>{addArtists()}</h4>
             <h5>{props.track.album.name}</h5>
             {addOrRemoveButton()}
         </div>

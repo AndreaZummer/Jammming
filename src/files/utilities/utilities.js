@@ -68,7 +68,8 @@ async function logginChecker() {
   }; 
   if (accessToken) {
     const expirationTime=localStorage.getItem('expiration_time');
-    if(expirationTime <= Date.now()) {
+    const actualTime=Date.now();
+    if(expirationTime <= actualTime) {
       await getAccessToken();
     }
   }
