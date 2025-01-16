@@ -1,9 +1,10 @@
 import React from 'react';
 import Track from './track';
+import '../styles/searchResults.css';
 
 function SearchResults(props) {
     return (
-        <div>
+        <div className='searchResults'>
             {props.searchResults.map((track,index) => { return (
                 <Track track={track} key={`track${index}`} selectionClick={props.selectionClick}/>
             )})}

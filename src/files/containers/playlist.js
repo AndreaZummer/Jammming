@@ -38,7 +38,7 @@ function PLaylist(props) {
     };
 
     return (
-        <div>
+        <div className='playlist'>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="New Playlist" onChange={namingPlaylist} value={name} disabled={disabled}/>
             </form>

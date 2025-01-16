@@ -3,7 +3,7 @@ import Track from './track';
 
 function Tracklist(props) {
     return (
-        <div>
+        <div className='tracklist'>
             {props.tracklistSelected.map((track) => {return (
                 <Track track={track} key={track.uri} removeClick={props.removeClick}/>
             )

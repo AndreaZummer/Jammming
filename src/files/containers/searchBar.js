@@ -36,12 +36,12 @@ function SearchBar(props) {
 
     return (
         <div className='searchBar'>
-            <div id='searchBarAfter'>
+            <div className={props.searching? 'afterSearching' : 'beforeSearching'}>
                 <input type="text" placeholder='Song Title / Artist' value={search} onChange={handleChange}/>
-                <button onClick={handleSearchClick}> Search </button>
+                <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             </div>
             {props.searching && (
-            <div>
+            <div className='columns'>
                 <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
                 <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing}/>
             </div>

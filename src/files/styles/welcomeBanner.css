@@ -1,6 +1,7 @@
 .welcomeBanner {
     width: 38%;
     padding: 3%;
+    margin-left: 14%;
     border: 2px solid #ffffffcf;
     background-color: #aeeddac7;
 }
@@ -12,5 +13,5 @@
 }
 
 .welcomeBanner p {
-    padding: 3% 12%;
+    padding: 3% 15% 10%;
 }
