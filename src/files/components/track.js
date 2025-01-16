@@ -16,7 +16,7 @@ function Track(props) {
     function addOrRemoveButton () {
         if (props.removeClick) {
             return (
-                <button className='add' onClick={handleRemove}><span>-</span> Remove</button>
+                <button className='remove' onClick={handleRemove}><span id='remove'>-</span></button>
             )}
         else {
             return (

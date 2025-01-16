@@ -25,11 +25,11 @@ function App() {
         <h1>JAMMMING</h1>
       </header>
       <main>
+        {reset && <h2 id='success'>Playlist successfully added to Spotify!</h2>}
         <div className='searching'>
           {!searching && <WelcomeBanner />}
           <SearchBar handleSearching={handleSearching} searching={searching} handleReset={handleReset}/>
         </div>
-          {reset && <h2>Playlist successfully added to Spotify!</h2>}
         </main>
     </div>
   );

@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import Tracklist from '../components/tracklist';
 import AddToSpotifyButton from '../components/addToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
+import '../styles/playlist.css';
 
 function PLaylist(props) {
     
@@ -44,9 +45,9 @@ function PLaylist(props) {
             </form>
             <h2>{playlistName}</h2>
             {playlistName && 
-                <button onClick={handleChangingNameClick}> Change Playlist Name</button>}
+                <button id='changeButton' onClick={handleChangingNameClick}> Change Playlist Name</button>}
             <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
-            <AddToSpotifyButton onAdd={addToSpotify} refreshing={props.refreshing}/>
+            <AddToSpotifyButton id='addToSpotify' onAdd={addToSpotify} refreshing={props.refreshing}/>
         </div>
     )
 };

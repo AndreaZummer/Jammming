@@ -1,0 +1,59 @@
+.playlist {
+    background-color: #efefef4d;
+    display: flex;
+    flex-direction: column;
+}
+
+.playlist form {
+    text-align: center;
+    margin-top: 2%;
+}
+
+.playlist input {
+    width: 50%;
+    height: 2rem;
+    background-color: #aeedda;
+    padding: 2%;
+    border-radius: 5%;
+    font-size: 1.25rem;
+    letter-spacing: .2rem;
+}
+
+.playlist input:focus{
+    background-color: #265b4fd7;
+    color: #fff;
+}
+
+.playlist h2 {
+    text-align: center;
+    padding: 2% 0;
+}
+
+.playlist button {
+    border-radius: 5%;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 1% 0;
+    translate: 120%;
+}
+    
+.playlist button:hover {
+    background-color: #000;
+    color: #fff;
+    transition: background-color .5s;
+}
+
+#changeButton {
+    letter-spacing: .25px;
+    font-size: .65rem;
+    font-weight: 400;
+    width: 30%;
+    translate: 120%;
+}
+
+#addToSpotify {
+    width: 30%;
+    margin-top: 1%;
+
+}

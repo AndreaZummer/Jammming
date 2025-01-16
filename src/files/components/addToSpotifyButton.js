@@ -6,7 +6,7 @@ function AddToSpotifyButton(props) {
         await props.onAdd();
         props.refreshing();
     }
-    return <button onClick={handleAddClick}>Add Playlist To Spotify</button>
+    return <button id='addToSpotify' onClick={handleAddClick}>Add Playlist To Spotify</button>
 };
 
 export default AddToSpotifyButton; 
