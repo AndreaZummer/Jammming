@@ -34,7 +34,7 @@
     letter-spacing: 1.5px;
     font-size: 1rem;
     font-weight: 600;
-    padding: 1% 0;
+    padding: 1%;
     translate: 120%;
 }
     
@@ -57,3 +57,29 @@
     margin-top: 1%;
 }
 
+@media only screen and (max-width: 1050px) {
+    #addToSpotify {
+        width: 50%;
+        translate: 50%;
+        margin-top: .5rem;
+    }
+
+    .playlist input {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    #addToSpotify {
+        font-size: .7rem;
+    }
+
+    #changeButton {
+        width: 40%;
+        translate: 75%;
+    }
+
+    .playlist input {
+        height: 1.5rem;
+    }
+}

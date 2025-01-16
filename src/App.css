@@ -23,3 +23,23 @@
   text-align: center;
   padding: 0 0 2%;
 }
+
+@media only screen and (max-width: 900px) {
+    .searching {
+      display: block;
+    }
+
+    .App-header {
+      font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 775px) {
+  .App-header {
+    font-size: 1.5rem;
+  }
+
+  .App {
+    width: 90%;
+  }
+}
