@@ -1,6 +1,5 @@
 import React from 'react';
 import Track from './track';
-import '../styles/searchResults.css';
 
 function SearchResults(props) {
     return (

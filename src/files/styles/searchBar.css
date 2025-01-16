@@ -50,8 +50,12 @@
 .searchResults, .playlist {
     width: 45%;
     height: 40rem;
-    overflow: scroll;
+    overflow-y: scroll;
     border: 2px solid rgb(182, 177, 177);
+}
+
+.searchResults {
+    background-color: #aeeddac7;
 }
 
 .afterSearching {
@@ -87,13 +91,21 @@
     font-size: 16px;
     font-weight: 600;
     translate: 150%;
-    margin: 5% 0%;
+    margin: 5% 0;
     padding: 1% 0;
 }
 
 .afterSearching button:hover {
     background-color: #000;
     color: #fff;
-    transition: background-color .5s;
-    
+    transition: background-color .5s;   
+}
+
+::-webkit-scrollbar {
+    width: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #c18d59;
+    border-radius: 2px;
 }

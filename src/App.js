@@ -11,13 +11,21 @@ function App() {
   
   const [searching, setSearching] = useState(false);
   const [reset, setReset] = useState(false);
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setReset(false)
+    }, 5000);
+  }, [reset]);
+
   function handleSearching() {
     setSearching(true);
   };
+
   function handleReset() {
     setSearching(false);
     setReset(true);
-  }
+  };
 
   return (
     <div className="App">
@@ -32,7 +40,7 @@ function App() {
         </div>
         </main>
     </div>
-  );
-}
+  )
+};
 
 export default App;
