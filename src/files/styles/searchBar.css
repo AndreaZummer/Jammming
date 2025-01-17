@@ -51,7 +51,7 @@
     width: 45%;
     height: 40rem;
     overflow-y: scroll;
-    border: 2px solid rgb(182, 177, 177);
+    border: 2px solid #b6b1b1;
 }
 
 .searchResults {

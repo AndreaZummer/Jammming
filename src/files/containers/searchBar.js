@@ -9,12 +9,6 @@ function SearchBar(props) {
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState(null);
     const [selected, setSelected] = useState([]);
-
-    function refreshing() {
-        setSearchResults(null);
-        setSelected([]);
-        props.handleReset();
-    }
                   
     function handleSelectionClick(newSelectedTrack) {
         setSelected([...selected, newSelectedTrack])
@@ -32,6 +26,12 @@ function SearchBar(props) {
         setSearchResults(await getSearchResults(search));
         setSearch('');
         props.handleSearching();
+    };
+
+    function refreshing() {
+        setSearchResults(null);
+        setSelected([]);
+        props.handleReset();
     };
 
     return (
