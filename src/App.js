@@ -2,11 +2,14 @@ import './App.css';
 import React,{useEffect, useState} from 'react';
 import SearchBar from './files/containers/searchBar';
 import WelcomeBanner from './files/components/welcomeBanner';
-import {getProfile} from './files/utilities/utilities';
+import {getProfile, expirationChecker} from './files/utilities/utilities';
 
 function App() {
   useEffect (()=> {
     getProfile();
+    setInterval(() => {
+      expirationChecker()
+    }, 400)
   }, []);
   
   const [searching, setSearching] = useState(false);

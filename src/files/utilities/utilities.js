@@ -57,6 +57,15 @@ async function getAccessToken() {
   const expirationTime = Date.now() + 3600000;
   localStorage.setItem('expiration_time', expirationTime);
 };
+// Checks if access token is expired
+
+async function expirationChecker() {
+  const expirationTime=localStorage.getItem('expiration_time');
+  const actualTime=Date.now();
+  if(expirationTime <= actualTime) {
+    await getAccessToken();
+  }
+};
 // Checks if user is logged in
 
 async function logginChecker() {
@@ -65,13 +74,6 @@ async function logginChecker() {
 
   if (!accessToken) {
       await getAccessToken();
-  }; 
-  if (accessToken) {
-    const expirationTime=localStorage.getItem('expiration_time');
-    const actualTime=Date.now();
-    if(expirationTime <= actualTime) {
-      await getAccessToken();
-    }
   }
   return accessToken;
 };
@@ -166,4 +168,4 @@ async function addTracksToPlaylist(uriList,playlistName) {
   };
 };
 
-export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify};
+export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify, expirationChecker};
