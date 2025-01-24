@@ -7,7 +7,7 @@ async function getAccessToken() {
     let hashParams = {};
     let e, r = /([^&;=]+)=?([^&;]*)/g,
       q = window.location.hash.substring(1);
-    while ( e = r.exec(q)) {
+    while ( e === r.exec(q)) {
       hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
@@ -161,7 +161,7 @@ async function addTracksToPlaylist(uriList,playlistName) {
     if (!response.ok) {
       throw new Error (`HTTP error! Status: ${response.status}`);
     }
-    const body = await response.json();
+    await response.json();
   }
   catch(error) {
     console.log("Error adding to Spotify:", error);
