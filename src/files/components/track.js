@@ -26,11 +26,13 @@ function Track(props) {
     };
 
     function addArtists() {
-        const artists = props.track.artists.map(
-            (artist,index) => {if (index<3) { return artist.name}}
+        const artists = props.track.artists.filter(
+            (artist,index) => {return index<3}
+        );
+        const artist = artists.map(artista => {return artista.name}
         );
 
-        return artists.join(', ');
+        return artist.join(', ');
     };
 
     return (
