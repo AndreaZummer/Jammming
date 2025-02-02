@@ -22,7 +22,8 @@ function SearchBar(props) {
         setSearch(event.target.value);
     };
 
-    async function handleSearchClick() {
+    async function handleSearchClick(e) {
+        e.preventDefault();
         setSearchResults(await getSearchResults(search));
         setSearch('');
         props.handleSearching();
@@ -37,7 +38,9 @@ function SearchBar(props) {
     return (
         <div className='searchBar'>
             <div className={props.searching? 'afterSearching' : 'beforeSearching'}>
-                <input type="text" placeholder='Song Title / Artist' value={search} onChange={handleChange}/>
+                <form onSubmit={handleSearchClick}>
+                    <input type="text" placeholder='Song Title / Artist' value={search} onChange={handleChange}/>
+                </form>
                 <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             </div>
             {props.searching && (

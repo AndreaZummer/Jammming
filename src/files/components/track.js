@@ -16,11 +16,11 @@ function Track(props) {
     function addOrRemoveButton () {
         if (props.removeClick) {
             return (
-                <button className='remove' onClick={handleRemove}><span id='remove'>-</span></button>
+                <button id='remove' onClick={handleRemove}>-</button>
             )}
         else {
             return (
-                <button className='add' onClick={handleAdd}><span>+</span> Add</button>
+                <button className='add' onClick={handleAdd}>+</button>
             )
         }
     };
@@ -37,9 +37,12 @@ function Track(props) {
 
     return (
         <div className='track'>
-            <h3>{props.track.name}</h3>
-            <h4>{addArtists()}</h4>
-            <h5>{props.track.album.name}</h5>
+            <div className='trackInfo'>
+                <h3>{props.track.name}</h3>
+                <h4>{addArtists()}</h4>
+                <h5>{props.track.album.name}</h5>
+            </div>
+            <img alt="album cover" src={props.track.album.images[2].url} />
             {addOrRemoveButton()}
         </div>
     )
