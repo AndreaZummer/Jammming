@@ -3,6 +3,7 @@ import React,{useEffect, useState} from 'react';
 import SearchBar from './files/containers/searchBar';
 import WelcomeBanner from './files/components/welcomeBanner';
 import {getProfile, expirationChecker} from './files/utilities/utilities';
+import musicalNote from './musical-note-quaver-svgrepo-com.svg';
 
 function App() {
   useEffect (()=> {
@@ -12,8 +13,9 @@ function App() {
     }, 400)
   }, []);
   
-  const [searching, setSearching] = useState(false);
   const [reset, setReset] = useState(false);
+  const [name, setName] = useState('');
+  const [playlistName, setPlaylistName] = useState('');
   
   useEffect(() => {
     setTimeout(() => {
@@ -21,26 +23,42 @@ function App() {
     }, 5000);
   }, [reset]);
 
-  function handleSearching() {
-    setSearching(true);
+  function namingPlaylist(event) {
+    setName(event.target.value);
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setPlaylistName(name);
+  };
+
+  function changePlaylistName(newName) {
+    setPlaylistName(newName)
   };
 
   function handleReset() {
-    setSearching(false);
+    setPlaylistName('');
     setReset(true);
   };
 
   return (
     <div className="App">
       <header className="App-header">
+        <img src={musicalNote} alt='musical note' />
         <h1>JAMMMING</h1>
+        <img src={musicalNote} alt='musical note' />
       </header>
       <main>
         {reset && <h2 id='success'>Playlist successfully added to Spotify!</h2>}
-        <div className='searching'>
-          {!searching && <WelcomeBanner />}
-          <SearchBar handleSearching={handleSearching} searching={searching} handleReset={handleReset}/>
-        </div>
+        {!playlistName && (
+          <div className='creating'>
+            <WelcomeBanner />
+            <form onSubmit={handleSubmit}>
+              <input type="text" placeholder="+ New Playlist" onChange={namingPlaylist} value={name}/>
+            </form>
+          </div> )}
+        {playlistName &&
+          <SearchBar handleReset={handleReset} playlistName={playlistName} changePlaylistName={changePlaylistName}/>}
         </main>
     </div>
   )

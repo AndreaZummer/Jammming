@@ -2,13 +2,11 @@ import React,{useState,useEffect} from 'react';
 import Tracklist from '../components/tracklist';
 import AddToSpotifyButton from '../components/addToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
+import moreOptionsIcon from './more-horizontal-svgrepo-com.svg';
 import '../styles/playlist.css';
 
 function PLaylist(props) {
     
-    const [name, setName]=useState('');
-    const [playlistName, setPlaylistName]=useState('New Playlist');
-    const [disabled, setDisabled] = useState(false);
     const [uriList, setUriLits] = useState([]);
 
     useEffect(
@@ -17,35 +15,20 @@ function PLaylist(props) {
         }, [props.selected]
     );
 
-    function namingPlaylist(event) {
-        setName(event.target.value);
-    };
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        setPlaylistName(name);
-        setName('Already Named');
-        setDisabled(true);
-    };
-
-    function handleChangingNameClick() {
-      setName(playlistName);
-      setPlaylistName('');
-      setDisabled(false);  
+    function handleChangingNameClick(newName) {
+        props.changePlaylistName(newName)
     };
 
     async function addToSpotify() {
-        await addTracksToPlaylist(uriList,playlistName);
+        await addTracksToPlaylist(uriList,props.playlistName);
     };
 
     return (
         <div className='playlist'>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="New Playlist" onChange={namingPlaylist} value={name} disabled={disabled}/>
-            </form>
-            <h2>{playlistName}</h2>
-            {playlistName && 
-                <button id='changeButton' onClick={handleChangingNameClick}> Change Playlist Name</button>}
+            <div className='playlistName'>
+                <h2>{props.playlistName}</h2>
+                <img src={moreOptionsIcon} alt='more option'/>
+            </div>
             <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
             <AddToSpotifyButton id='addToSpotify' onAdd={addToSpotify} refreshing={props.refreshing}/>
         </div>

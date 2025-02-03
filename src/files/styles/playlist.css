@@ -3,59 +3,27 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
+    min-height: 20rem;
+    max-height: 40rem;
 }
 
-.playlist form {
-    text-align: center;
-    margin-top: 2%;
+.playlistName img {
+    width: 6%;
+    position: relative;
+    bottom: 45%;
+    left: 90%;
+    border-radius: 50%;
 }
 
-.playlist input {
-    width: 50%;
-    height: 2rem;
-    background-color: #aeedda;
-    padding: 2%;
-    border-radius: 5%;
-    font-size: 1.25rem;
-    letter-spacing: .2rem;
-}
-
-.playlist input:focus{
-    background-color: #265b4fd7;
-    color: #fff;
-}
-
-.playlist h2 {
-    text-align: center;
-    padding: 2% 0;
-}
-
-.playlist button {
-    border-radius: 5%;
-    letter-spacing: 1.5px;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 1%;
-    translate: 120%;
-}
-    
-.playlist button:hover {
-    background-color: #000;
-    color: #fff;
-    transition: background-color .5s;
-}
-
-#changeButton {
-    letter-spacing: .25px;
-    font-size: .65rem;
-    font-weight: 400;
-    width: 30%;
-    translate: 120%;
+.playlistName img:hover {
+    background-color: #00000049;
+    cursor: pointer;
 }
 
 #addToSpotify {
     width: 30%;
     margin-top: 1%;
+    position: sticky;
 }
 
 @media only screen and (max-width: 1050px) {
@@ -64,23 +32,10 @@
         translate: 50%;
         margin-top: .5rem;
     }
-
-    .playlist input {
-        font-size: 1rem;
-    }
 }
 
 @media only screen and (max-width: 430px) {
     #addToSpotify {
         font-size: .7rem;
-    }
-
-    #changeButton {
-        width: 40%;
-        translate: 75%;
-    }
-
-    .playlist input {
-        height: 1.5rem;
     }
 }

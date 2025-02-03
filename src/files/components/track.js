@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/track.css';
+import addButton from './add-circle-svgrepo-com.svg';
+import removeButton from './remove-circle-svgrepo-com.svg';
 
 function Track(props) {
 
@@ -16,11 +18,11 @@ function Track(props) {
     function addOrRemoveButton () {
         if (props.removeClick) {
             return (
-                <button id='remove' onClick={handleRemove}>-</button>
+                <img id='remove' onClick={handleRemove} alt='remove' src={removeButton}/>
             )}
         else {
             return (
-                <button className='add' onClick={handleAdd}>+</button>
+                <img id='add' src={addButton} alt='add' onClick={handleAdd}/>
             )
         }
     };
@@ -43,7 +45,9 @@ function Track(props) {
                 <h5>{props.track.album.name}</h5>
             </div>
             <img alt="album cover" src={props.track.album.images[2].url} />
+            <div>
             {addOrRemoveButton()}
+            </div>
         </div>
     )
 };

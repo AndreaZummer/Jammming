@@ -2,45 +2,6 @@
     width: 100%;
 }
 
-.beforeSearching {
-    width: 80%;
-}
-
-.beforeSearching input {
-    display: block;
-    width: 50%;
-    height: 2rem;
-    background-color: #aeedda;
-    position: relative;
-    left: 20%;
-    top: 5rem;
-    border-radius: 5%;
-    font-size: 1.25rem;
-    letter-spacing: 1.5px;
-}
-
-.beforeSearching input:focus{
-    background-color: #265b4fd7;
-    color: #fff;
-}
-
-.beforeSearching button {
-    width: 50%;
-    height: 2rem;
-    position: relative;
-    left: 20.5%;
-    top: 7rem;
-    border-radius: 5%;
-    letter-spacing: 2px;
-    font-weight: 600;
-}
-
-.beforeSearching button:hover {
-    background-color: #000;
-    color: #fff;
-    transition: background-color .5s;
-}
-
 .columns {
     display: flex;
     justify-content: space-between;
@@ -49,54 +10,59 @@
 
 .searchResults, .playlist {
     width: 45%;
-    height: 40rem;
     overflow-y: scroll;
     border: 2px solid #b6b1b1;
+}
+
+.searchBar h2 {
+    text-align: center;
+    padding: 2% 0;
 }
 
 .searchResults {
     background-color: #aeeddac7;
     margin-bottom: 2rem;
+    height: 40rem;
 }
 
-.afterSearching {
-    width: 50%;
-    translate: 50%;
-    position: relative;
-    bottom: 5%;
-}
-
-.afterSearching input {
+.searchBar input {
     position: initial;
     display: block;
-    width: 60%;
-    height: 1.7rem;
+    width: 40%;
+    height: 2.5rem;
+    padding: 1%;
     background-color: #aeedda;
-    translate: 28%;
+    translate: 75%;
     font-size: large;
     letter-spacing: .2rem;
+    border-radius: 1rem;
 } 
 
-.afterSearching input:focus{
+.searchBar input:focus{
     background-color: #265b4fd7;
     color: #fff;
     font-size: large;
     letter-spacing: .2rem;
 }
 
-.afterSearching button {
-    width: 24%;
+.searchBar input::placeholder {
+    color:  #000;
+}
+
+.searchBar button {
+    width: 20%;
     position: initial;
     border-radius: 5%;
     letter-spacing: 1.5px;
     font-size: 16px;
     font-weight: 600;
-    translate: 150%;
-    margin: 5% 0;
+    translate: 200%;
+    margin: 3% 0;
     padding: 1% 0;
+    color: #000;
 }
 
-.afterSearching button:hover {
+.searchBar button:hover {
     background-color: #000;
     color: #fff;
     transition: background-color .5s;   

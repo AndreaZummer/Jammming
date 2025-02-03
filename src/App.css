@@ -9,11 +9,38 @@
   font-size: 2.5rem;
   text-align: center;
   color:#53cba1;
+  display: flex;
+  justify-content: center;
+}
+.App-header img {
+  width: 4%;
+  margin: 0 1.5%;
+}
+.creating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-.searching {
-  display: flex;
-  justify-content: space-between;
+.creating input {
+  border-radius: 1rem;
+  padding: .7rem;
+  width: 130%;
+  margin-left: 50%;
+  position: relative;
+  top: 40%;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+}
+
+.creating input:focus{
+  background-color: #265b4fd7;
+  color: #fff;
+}
+
+.creating input::placeholder {
+  color: #000;
 }
 
 #success {
@@ -25,13 +52,10 @@
 }
 
 @media only screen and (max-width: 900px) {
-    .searching {
-      display: block;
-    }
 
-    .App-header {
-      font-size: 2rem;
-    }
+  .App-header {
+    font-size: 2rem;
+  }
 }
 
 @media only screen and (max-width: 775px) {
