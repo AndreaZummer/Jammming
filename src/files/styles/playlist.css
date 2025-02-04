@@ -9,10 +9,14 @@
     border: 2px solid #b6b1b1;
 }
 
+.playlistName {
+    height: 10%;
+}
+
 .playlistName img {
     width: 6%;
     position: relative;
-    bottom: 45%;
+    bottom: 70%;
     left: 90%;
     border-radius: 50%;
 }
@@ -22,13 +26,18 @@
     cursor: pointer;
 }
 
-.tracklist {
+.center {
     overflow-y: scroll;
+    height: 75%;
+}
+
+.addToSpotify {
+    height: 15%;
 }
 
 #addToSpotify {
     width: 30%;
-    margin-top: 1%;
+    margin-top: 3%;
     position: sticky;
 }
 

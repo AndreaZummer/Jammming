@@ -29,7 +29,7 @@ function PLaylist(props) {
                 <h2>{props.playlistName}</h2>
                 <img src={moreOptionsIcon} alt='more option'/>
             </div>
-            <div className='tracklist'>
+            <div className='center'>
                 <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
             </div>
             <div className='addToSpotify'>
