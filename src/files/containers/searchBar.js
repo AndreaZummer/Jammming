@@ -11,7 +11,9 @@ function SearchBar(props) {
     const [selected, setSelected] = useState([]);
     
     function handleSelectionClick(newSelectedTrack) {
-        setSelected([...selected, newSelectedTrack])
+        if (!selected.includes(newSelectedTrack)) {
+            setSelected([...selected, newSelectedTrack])
+        }
     };
     
     function handleRemoveClick(removedTrack) {
