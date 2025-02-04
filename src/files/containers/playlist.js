@@ -29,8 +29,12 @@ function PLaylist(props) {
                 <h2>{props.playlistName}</h2>
                 <img src={moreOptionsIcon} alt='more option'/>
             </div>
-            <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
-            <AddToSpotifyButton id='addToSpotify' onAdd={addToSpotify} refreshing={props.refreshing}/>
+            <div className='tracklist'>
+                <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
+            </div>
+            <div className='addToSpotify'>
+                <AddToSpotifyButton id='addToSpotify' onAdd={addToSpotify} refreshing={props.refreshing}/>
+            </div>
         </div>
     )
 };

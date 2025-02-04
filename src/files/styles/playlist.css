@@ -1,10 +1,12 @@
 .playlist {
+    width: 45%;
     background-color: #efefef4d;
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
     min-height: 20rem;
     max-height: 40rem;
+    border: 2px solid #b6b1b1;
 }
 
 .playlistName img {
@@ -18,6 +20,10 @@
 .playlistName img:hover {
     background-color: #00000049;
     cursor: pointer;
+}
+
+.tracklist {
+    overflow-y: scroll;
 }
 
 #addToSpotify {

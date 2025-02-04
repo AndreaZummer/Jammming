@@ -25,8 +25,8 @@
 .creating input {
   border-radius: 1rem;
   padding: .7rem;
-  width: 130%;
-  margin-left: 50%;
+  width: 100%;
+  margin-left: 35%;
   position: relative;
   top: 40%;
   font-size: 1.2rem;
@@ -41,6 +41,26 @@
 
 .creating input::placeholder {
   color: #000;
+}
+
+.creating button {
+  width: 30%;
+  position: relative;
+  top: 40%;
+  border-radius: 5%;
+  letter-spacing: 1.5px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 3% 0 3% 65%;
+  padding: 1% 0;
+  color: #000;
+  background-color: #efefef65;
+}
+
+.creating button:hover {
+  background-color: #000;
+  color: #fff;
+  transition: background-color .5s;   
 }
 
 #success {

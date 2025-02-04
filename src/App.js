@@ -30,6 +30,7 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault();
     setPlaylistName(name);
+    setName('');
   };
 
   function changePlaylistName(newName) {
@@ -55,6 +56,7 @@ function App() {
             <WelcomeBanner />
             <form onSubmit={handleSubmit}>
               <input type="text" placeholder="+ New Playlist" onChange={namingPlaylist} value={name}/>
+              <button>Create Playlist </button>
             </form>
           </div> )}
         {playlistName &&
