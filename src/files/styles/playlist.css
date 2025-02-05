@@ -11,17 +11,26 @@
 
 .playlistName {
     height: 10%;
+    display: flex;
 }
 
-.playlistName img {
-    width: 6%;
+.settings {
+    width: 20%;
+}
+
+.playlistName h2 {
+    width: 80%;
+}
+
+.settings img {
+    width: 30%;
     position: relative;
-    bottom: 60%;
-    left: 90%;
+    left: 48%;
+    top: 23%;
     border-radius: 50%;
 }
 
-.playlistName img:hover {
+.settings img:hover {
     background-color: #00000049;
     cursor: pointer;
 }
@@ -59,7 +68,7 @@
         margin: 2% 0;
     }
 
-    .playlistName img {
+    .settings img {
         bottom: 100%;
     }
 }
@@ -68,7 +77,7 @@
         font-size: .8rem;
     }
 
-    .playlistName img {
+    .settings img {
         bottom: 70%;
     }
 }

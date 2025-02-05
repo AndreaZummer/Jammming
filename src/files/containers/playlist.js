@@ -33,8 +33,10 @@ function PLaylist(props) {
         <div className='playlist'>
             <div className='playlistName'>
                 <h2>{props.playlistName}</h2>
-                <img src={moreOptionsIcon} alt='more option' onMouseOver={dropdownHandling} onMouseLeave={dropdownHandling2}/>
-                <Dropdown visible={visible} hover={dropdownHandling} leave={dropdownHandling2}/>
+                <div className='settings'>
+                    <img src={moreOptionsIcon} alt='more option' onMouseOver={dropdownHandling} onMouseLeave={dropdownHandling2}/>
+                    <Dropdown visible={visible} hover={dropdownHandling} leave={dropdownHandling2}/>
+                </div>
             </div>
             <div className='center'>
                 <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />

@@ -4,9 +4,10 @@
 
 .dropdown-true {
     display: inline-block;
-    position: absolute;
-    left: 83%;
-    top: 60.2%;
+    position: relative;
+    right: 10%;
+    top: 10%;
+    width: 190%;
 }
 
 .dropdown-true ul {
@@ -15,7 +16,9 @@
     border-radius: 5%;
     background-color: #ebe7e7;
     color: #000;
-    width: 60%;
+    position: relative;
+    top:0;
+    width: 80%;
 }
 
 .dropdown-true li {
@@ -38,6 +41,14 @@
     padding-right: 5%;
 }
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 790px) {
+    .dropdown-true {
+        width: 140%;
+    }
+}
 
+@media only screen and (max-width: 530px) {
+    .dropdown-true ul li{
+        font-size: .7rem;
+    }
 }
