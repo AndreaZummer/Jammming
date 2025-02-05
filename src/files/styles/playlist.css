@@ -16,7 +16,7 @@
 .playlistName img {
     width: 6%;
     position: relative;
-    bottom: 70%;
+    bottom: 60%;
     left: 90%;
     border-radius: 50%;
 }
@@ -49,13 +49,18 @@
     }
 }
 
-@media only screen and (max-width: 715px) {
+@media only screen and (max-width: 720px) {
     .playlistName {
         height: 15%;
     }
 
+    .playlist {
+        width: 100%;
+        margin: 2% 0;
+    }
+
     .playlistName img {
-        bottom: 110%;
+        bottom: 100%;
     }
 }
 @media only screen and (max-width: 470px) {

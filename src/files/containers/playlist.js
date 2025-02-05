@@ -3,11 +3,13 @@ import Tracklist from '../components/tracklist';
 import AddToSpotifyButton from '../components/addToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
 import moreOptionsIcon from './more-horizontal-svgrepo-com.svg';
+import Dropdown from '../components/dropdown';
 import '../styles/playlist.css';
 
 function PLaylist(props) {
     
     const [uriList, setUriLits] = useState([]);
+    const [visible, setVisible] = useState(false);
 
     useEffect(
         () => {
@@ -15,9 +17,13 @@ function PLaylist(props) {
         }, [props.selected]
     );
 
-    function handleChangingNameClick(newName) {
-        props.changePlaylistName(newName)
+    function dropdownHandling () {
+        setVisible(true);
     };
+
+    function dropdownHandling2() {
+        setVisible(false);
+    }
 
     async function addToSpotify() {
         await addTracksToPlaylist(uriList,props.playlistName);
@@ -27,7 +33,8 @@ function PLaylist(props) {
         <div className='playlist'>
             <div className='playlistName'>
                 <h2>{props.playlistName}</h2>
-                <img src={moreOptionsIcon} alt='more option'/>
+                <img src={moreOptionsIcon} alt='more option' onMouseOver={dropdownHandling} onMouseLeave={dropdownHandling2}/>
+                <Dropdown visible={visible} hover={dropdownHandling} leave={dropdownHandling2}/>
             </div>
             <div className='center'>
                 <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />

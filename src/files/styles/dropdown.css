@@ -1,0 +1,43 @@
+.dropdown-false {
+    display: none;
+}
+
+.dropdown-true {
+    display: inline-block;
+    position: absolute;
+    left: 83%;
+    top: 60.2%;
+}
+
+.dropdown-true ul {
+    list-style: none;
+    border: 1px solid #000;
+    border-radius: 5%;
+    background-color: #ebe7e7;
+    color: #000;
+    width: 60%;
+}
+
+.dropdown-true li {
+    font-size: .8rem;
+    text-align: center;
+    padding: 2%;
+    display: flex;
+}
+
+.dropdown-true li:hover {
+    cursor: pointer;
+    background-color: #00000063;
+
+}
+
+.dropdown-true li img {
+    width: 16%;
+    position: relative;
+    left: 2%;
+    padding-right: 5%;
+}
+
+@media only screen and (max-width: 1050px) {
+
+}
