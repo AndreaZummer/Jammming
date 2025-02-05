@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../styles/track.css';
 import addButton from './add-circle-svgrepo-com.svg';
 import removeButton from './remove-circle-svgrepo-com.svg';
 
 function Track(props) {
 
+    const [clicked, setClicked] = useState(false);
+
+    useEffect(() => {
+        setClicked(false)
+    }, [])
+
     function handleRemove() {
         const removedTrack=props.track;
         props.removeClick(removedTrack);
-    };
+        };
 
     function handleAdd() {
         const newSelectedTrack = props.track;
         props.selectionClick(newSelectedTrack);
+        setClicked(true);
     };
 
     function addOrRemoveButton () {
@@ -22,7 +29,7 @@ function Track(props) {
             )}
         else {
             return (
-                <img id='add' src={addButton} alt='add' onClick={handleAdd}/>
+                <img id='add' src={addButton} alt='add' onClick={handleAdd} className={`added-${clicked? 'yes' : 'no'}`}/>
             )
         }
     };

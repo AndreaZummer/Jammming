@@ -49,8 +49,21 @@
     }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 715px) {
+    .playlistName {
+        height: 15%;
+    }
+
+    .playlistName img {
+        bottom: 110%;
+    }
+}
+@media only screen and (max-width: 470px) {
     #addToSpotify {
-        font-size: .7rem;
+        font-size: .8rem;
+    }
+
+    .playlistName img {
+        bottom: 70%;
     }
 }

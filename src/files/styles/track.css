@@ -16,9 +16,13 @@
     opacity: .75;
 }
 
-#add:hover, #remove:hover {
+.added-no:hover, #remove:hover {
     cursor: pointer;
     opacity: 1;
+}
+
+.added-yes:hover {
+    cursor: not-allowed;
 }
 
 .trackInfo {

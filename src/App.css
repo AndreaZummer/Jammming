@@ -12,10 +12,12 @@
   display: flex;
   justify-content: center;
 }
+
 .App-header img {
   width: 4%;
   margin: 0 1.5%;
 }
+
 .creating {
   display: flex;
   flex-direction: row;
@@ -49,7 +51,7 @@
   top: 40%;
   border-radius: 5%;
   letter-spacing: 1.5px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   margin: 3% 0 3% 65%;
   padding: 1% 0;
@@ -71,10 +73,29 @@
   padding: 0 0 2%;
 }
 
+@media only screen and (max-width: 1320px) {
+  .creating input {
+    margin-left: 25%;
+    width: 85%;
+  }
+
+  .creating button {
+    margin: 3% 0 3% 55%;
+  }
+}
+
 @media only screen and (max-width: 900px) {
 
   .App-header {
     font-size: 2rem;
+  }
+
+  .App-header img {
+    width: 6%;
+  }
+
+  .creating button {
+    font-size: .8rem;
   }
 }
 
@@ -85,5 +106,45 @@
 
   .App {
     width: 90%;
+  }
+
+  .creating input {
+    width: 90%;
+    margin-left: 15%;
+    font-size: .8rem;
+  }
+
+  .creating button {
+    margin: 3% 0 3% 45%;
+  }
+
+  .creating button {
+    padding: 2%;
+    width: 40%;
+    font-size: .7rem;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .creating {
+    flex-direction: column;
+  }
+
+  .creating input {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .2rem;
+  }
+
+  .App-header img {
+    width: 6%;
+  }
+
+  .creating button {
+    font-size: .8rem;
+    margin: 3% 0 3% 28%;
   }
 }
