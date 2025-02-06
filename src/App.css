@@ -65,7 +65,7 @@
   transition: background-color .5s;   
 }
 
-#success {
+.success {
   font-size: 1.8rem;
   color: #53cba1;
   position: relative;

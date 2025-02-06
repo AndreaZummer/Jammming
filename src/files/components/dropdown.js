@@ -6,10 +6,11 @@ import '../styles/dropdown.css';
 function Dropdown (props) {
 
     return (
-        <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} onMouseLeave={props.leave}>
+        <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} /*onMouseLeave={props.leave}*/>
             <ul>
                 <li onClick={props.nameChangeHandle}><img alt='rename' src={rename}/>Rename</li>
-                <li><img alt='add' src={addPhoto}/>Add playlist cover</li>
+                <li><label for='fileupload'><img alt='add' src={addPhoto}/>Add playlist cover</label></li>
+                <input type='file' id='fileupload'/>
             </ul>
         </div>
     )

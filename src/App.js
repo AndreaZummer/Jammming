@@ -50,7 +50,7 @@ function App() {
         <img src={musicalNote} alt='musical note' />
       </header>
       <main>
-        {reset && <h2 id='success'>Playlist successfully added to Spotify!</h2>}
+        {reset&& <h2 className='success'>Playlist successfully added to Spotify!</h2>}
         {!playlistName && (
           <div className='creating'>
             <WelcomeBanner />

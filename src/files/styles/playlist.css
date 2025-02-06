@@ -20,6 +20,8 @@
 
 .playlistName h2, .playlistName form {
     width: 80%;
+    position: relative;
+    left: 8%;
 }
 
 .playlistName form input {
@@ -28,7 +30,7 @@
     translate: 18%;
 }
 
-.settings img {
+#more {
     width: 30%;
     position: relative;
     left: 48%;
@@ -36,7 +38,7 @@
     border-radius: 50%;
 }
 
-.settings img:hover {
+#more:hover {
     background-color: #00000049;
     cursor: pointer;
 }

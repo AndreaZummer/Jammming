@@ -33,7 +33,6 @@ function PLaylist(props) {
     function renamePlaylist(event) {
         event.preventDefault();
         props.handleSubmit(event);
-        // props.changePlaylistName();
         setNameChange(false);
     }
 
@@ -58,7 +57,7 @@ function PLaylist(props) {
             <div className='playlistName'>
                 {rename()}
                 <div className='settings'>
-                    <img src={moreOptionsIcon} alt='more option' onMouseOver={dropdownHandling} onMouseLeave={dropdownHandling2}/>
+                    <img id='more' src={moreOptionsIcon} alt='more option' onMouseOver={dropdownHandling} onMouseLeave={dropdownHandling2}/>
                     <Dropdown visible={visible} hover={dropdownHandling} leave={dropdownHandling2} nameChangeHandle={nameChangeHandle}/>
                 </div>
             </div>
