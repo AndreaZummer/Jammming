@@ -60,7 +60,7 @@ function App() {
             </form>
           </div> )}
         {playlistName &&
-          <SearchBar handleReset={handleReset} playlistName={playlistName} changePlaylistName={changePlaylistName}/>}
+          <SearchBar handleReset={handleReset} playlistName={playlistName} changePlaylistName={changePlaylistName} handleSubmit={handleSubmit} namingPlaylist={namingPlaylist}/>}
         </main>
     </div>
   )

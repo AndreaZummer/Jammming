@@ -44,7 +44,7 @@ function SearchBar(props) {
             <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             <div className='columns'>
                 <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
-                <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing} playlistName={props.playlistName} changePlaylistName={props.changePlaylistName}/>
+                <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing} playlistName={props.playlistName} changePlaylistName={props.changePlaylistName} handleSubmit={props.handleSubmit} namingPlaylist={props.namingPlaylist}/>
             </div>
         </div>
     )    

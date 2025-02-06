@@ -8,7 +8,7 @@ function Dropdown (props) {
     return (
         <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} onMouseLeave={props.leave}>
             <ul>
-                <li><img alt='rename' src={rename}/>Rename</li>
+                <li onClick={props.nameChangeHandle}><img alt='rename' src={rename}/>Rename</li>
                 <li><img alt='add' src={addPhoto}/>Add playlist cover</li>
             </ul>
         </div>
