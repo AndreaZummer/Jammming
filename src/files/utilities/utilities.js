@@ -75,29 +75,30 @@ async function logginChecker() {
   if (!accessToken) {
       await getAccessToken();
   }
-  return accessToken;
+  localStorage.setItem('access_token', accessToken)
+  return accessToken
 };
 
 async function getProfile() {
-  const accessToken = await logginChecker();
+  await logginChecker();
   const response = await fetch('https://api.spotify.com/v1/me', {
     headers: {
-      'Authorization': 'Bearer ' + accessToken
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
     }
   });
   
   const data = await response.json();
+  localStorage.setItem('userID', data.id);
   return data.id;
 };
 
 async function getSearchResults(searchedText) {
   const url='https://api.spotify.com/v1/search?q='+searchedText+'&type=track&market=SK&limit=20';
-  const accessToken = await logginChecker();
 
   try {
     const response = await fetch(url,{
       headers: {
-        'Authorization': 'Bearer '+ accessToken,
+        'Authorization': 'Bearer '+ localStorage.getItem('access_token'),
       }
     });
    if (!response.ok) {
@@ -113,14 +114,12 @@ async function getSearchResults(searchedText) {
 };
 
 async function addPlaylistToSpotify(playlistName) {
-  const accessToken = await logginChecker();
-  const userID = await getProfile();
- 
+
   try {
-    const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+    const response = await fetch(`https://api.spotify.com/v1/users/${localStorage.getItem('userID')}/playlists`, {
         method:'POST',
         headers: {
-          'Authorization':'Bearer ' + accessToken,
+          'Authorization':'Bearer ' + localStorage.getItem('access_token'),
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -134,6 +133,7 @@ async function addPlaylistToSpotify(playlistName) {
     }
     const body = await response.json();
     const playlistID = body.id;
+    localStorage.setItem('playlistID', playlistID)
     return playlistID;
   }
   catch(error) {
@@ -142,15 +142,12 @@ async function addPlaylistToSpotify(playlistName) {
 };
 
 async function addTracksToPlaylist(uriList,playlistName) {
-  const accessToken= await logginChecker();
-  const userID = await getProfile(accessToken);
-  const playlistID= await addPlaylistToSpotify(playlistName);
 
   try {
-    const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+    const response = await fetch(`https://api.spotify.com/v1/users/${localStorage.getItem('userID')}/playlists/${localStorage.getItem('playlistID')}/tracks`, {
       method:'POST',
       headers: {
-        'Authorization':'Bearer ' + accessToken,
+        'Authorization':'Bearer ' + localStorage.getItem('access_token'),
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
