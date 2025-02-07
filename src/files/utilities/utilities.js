@@ -101,11 +101,13 @@ async function getSearchResults(searchedText) {
         'Authorization': 'Bearer '+ localStorage.getItem('access_token'),
       }
     });
-   if (!response.ok) {
+
+    if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     };
     const body = await response.json();
     const tracklist = body.tracks.items;
+    console.log(tracklist);
     return tracklist;
   }
   catch(error) {
@@ -133,7 +135,7 @@ async function addPlaylistToSpotify(playlistName) {
     }
     const body = await response.json();
     const playlistID = body.id;
-    localStorage.setItem('playlistID', playlistID)
+    localStorage.setItem('playlistID', playlistID);
     return playlistID;
   }
   catch(error) {
@@ -142,7 +144,8 @@ async function addPlaylistToSpotify(playlistName) {
 };
 
 async function addTracksToPlaylist(uriList,playlistName) {
-
+  await addPlaylistToSpotify(playlistName);
+  
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${localStorage.getItem('userID')}/playlists/${localStorage.getItem('playlistID')}/tracks`, {
       method:'POST',
@@ -163,6 +166,8 @@ async function addTracksToPlaylist(uriList,playlistName) {
   catch(error) {
     console.log("Error adding to Spotify:", error);
   };
+  localStorage.removeItem('playlistID');
+  localStorage.removeItem('userID');
 };
 
 export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify, expirationChecker};
