@@ -42,7 +42,7 @@ async function getAccessToken() {
     let state = generateRandomString(16);
 
     localStorage.setItem(stateKey, state);
-    const scope = 'playlist-modify-private';
+    const scope = 'ugc-image-upload playlist-modify-public playlist-modify-private';
 
     let url = 'https://accounts.spotify.com/authorize';
     url += '?response_type=token';
@@ -107,7 +107,6 @@ async function getSearchResults(searchedText) {
     };
     const body = await response.json();
     const tracklist = body.tracks.items;
-    console.log(tracklist);
     return tracklist;
   }
   catch(error) {
@@ -143,8 +142,57 @@ async function addPlaylistToSpotify(playlistName) {
   };
 };
 
+async function addPlaylistCover() {
+  let uploadImage = localStorage.getItem('uploadImage');
+  async function convertImage(uploadImage) {
+    
+    /*const reader = new FileReader();
+    reader.onload = (event) => {
+      const image = new Image();
+      image.src = event.target.result;
+        image.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = image.width;
+          canvas.height = image.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(image, 0, 0);
+          // const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+          canvas.toBlob((blob) => {
+            if (blob) {
+            const url = URL.createObjectURL(blob);
+            console.log(typeof url)
+            return url
+        }}, 'image/jpeg');
+        }; 
+    };
+    
+    reader.readAsDataURL(uploadImage);*/
+  };
+  // const jpegImage = convertImage(uploadImage);
+
+  try {
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${localStorage.getItem('playlistID')}/images`, {
+        method:'PUT',
+        headers: {
+          'Authorization':'Bearer ' + localStorage.getItem('access_token'),
+          'Content-Type': 'image/jpeg',
+        },
+        body: uploadImage,
+    });
+    if (!response.ok) {
+      throw new Error (`HTTP error! Status: ${response.status}`);
+    }
+    await response.json();
+  }
+  catch(error) {
+    console.log("Error adding to Spotify:", error);
+  };
+  localStorage.removeItem('uploadImage');
+};
+
 async function addTracksToPlaylist(uriList,playlistName) {
   await addPlaylistToSpotify(playlistName);
+  await addPlaylistCover();
   
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${localStorage.getItem('userID')}/playlists/${localStorage.getItem('playlistID')}/tracks`, {
@@ -167,7 +215,6 @@ async function addTracksToPlaylist(uriList,playlistName) {
     console.log("Error adding to Spotify:", error);
   };
   localStorage.removeItem('playlistID');
-  localStorage.removeItem('userID');
 };
 
 export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify, expirationChecker};

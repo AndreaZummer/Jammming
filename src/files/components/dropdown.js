@@ -7,10 +7,24 @@ function Dropdown (props) {
 
     const formRef = useRef(null);
 
-    function autoSubmit() {
-        const uploadImage = formRef.current.value;
-        localStorage.setItem('uploadImage', uploadImage);
-        console.log(localStorage.getItem('uploadImage'));
+    async function autoSubmit(event) {
+        const uploadImage = event.target.files[0];
+
+        function toBase64(uploadImage) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base = reader.result;
+                    const base64 = base.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");    
+                    resolve(base64)
+                };
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(uploadImage)
+            })
+        };
+        const base64 = await toBase64(uploadImage);
+        localStorage.setItem('uploadImage', base64);
+        // console.log(localStorage.getItem('uploadImage'));
     }
 
     return (
@@ -18,9 +32,7 @@ function Dropdown (props) {
             <ul>
                 <li onClick={props.nameChangeHandle}><img alt='rename' src={rename}/>Rename</li>
                 <li><label htmlFor='fileUpload'><img alt='add' src={addPhoto}/>Add playlist cover</label></li>
-                {/* <form method='POST' action='..\utilities\uploadedPicture.js' ref={formRef}> */}
-                    <input type='file' onChange={autoSubmit} name='coverPicture' id='fileUpload' accept='image/*' ref={formRef}/>
-                {/* </form> */}
+                <input type='file' onChange={autoSubmit} name='coverPicture' id='fileUpload' accept='image/jpeg' ref={formRef}/>
             </ul>
         </div>
     )
