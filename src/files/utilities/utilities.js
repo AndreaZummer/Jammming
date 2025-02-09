@@ -144,31 +144,6 @@ async function addPlaylistToSpotify(playlistName) {
 
 async function addPlaylistCover() {
   let uploadImage = localStorage.getItem('uploadImage');
-  async function convertImage(uploadImage) {
-    
-    /*const reader = new FileReader();
-    reader.onload = (event) => {
-      const image = new Image();
-      image.src = event.target.result;
-        image.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = image.width;
-          canvas.height = image.height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(image, 0, 0);
-          // const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.9);
-          canvas.toBlob((blob) => {
-            if (blob) {
-            const url = URL.createObjectURL(blob);
-            console.log(typeof url)
-            return url
-        }}, 'image/jpeg');
-        }; 
-    };
-    
-    reader.readAsDataURL(uploadImage);*/
-  };
-  // const jpegImage = convertImage(uploadImage);
 
   try {
     const response = await fetch(`https://api.spotify.com/v1/playlists/${localStorage.getItem('playlistID')}/images`, {

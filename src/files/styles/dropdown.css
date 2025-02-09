@@ -28,7 +28,7 @@
     display: flex;
 }
 
-.dropdown-true li:hover {
+.menu li:hover {
     cursor: pointer;
     background-color: #00000063;
 
@@ -47,6 +47,23 @@
 
 #fileUpload {
     display: none;
+}
+
+#addingCoverMenu-true {
+    width: 70%;
+    height: fit-content;
+    position: relative;
+    left: 53%;
+    transform: translateY(-15%);
+    border: none;
+}
+
+#addingCoverMenu-false {
+    display: none;
+}
+
+#addingCoverMenu-true li{
+    font-size: .5rem;
 }
 
 @media only screen and (max-width: 1110px) {
