@@ -50,7 +50,7 @@ function App() {
         <img src={musicalNote} alt='musical note' />
       </header>
       <main>
-        {reset && <h2 id='success'>Playlist successfully added to Spotify!</h2>}
+        {reset&& <h2 className='success'>Playlist successfully added to Spotify!</h2>}
         {!playlistName && (
           <div className='creating'>
             <WelcomeBanner />
@@ -60,7 +60,7 @@ function App() {
             </form>
           </div> )}
         {playlistName &&
-          <SearchBar handleReset={handleReset} playlistName={playlistName} changePlaylistName={changePlaylistName}/>}
+          <SearchBar handleReset={handleReset} playlistName={playlistName} changePlaylistName={changePlaylistName} handleSubmit={handleSubmit} namingPlaylist={namingPlaylist}/>}
         </main>
     </div>
   )

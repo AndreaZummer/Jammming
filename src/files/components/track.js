@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/track.css';
-import addButton from './add-circle-svgrepo-com.svg';
-import removeButton from './remove-circle-svgrepo-com.svg';
+import addButton from './resources/add-circle-svgrepo-com.svg';
+import removeButton from './resources/remove-circle-svgrepo-com.svg';
 
 function Track(props) {
 
     function handleRemove() {
         const removedTrack=props.track;
         props.removeClick(removedTrack);
-    };
+        };
 
     function handleAdd() {
         const newSelectedTrack = props.track;
@@ -22,7 +22,7 @@ function Track(props) {
             )}
         else {
             return (
-                <img id='add' src={addButton} alt='add' onClick={handleAdd}/>
+                <img id='add' src={addButton} alt='add' onClick={handleAdd} />
             )
         }
     };

@@ -11,7 +11,9 @@ function SearchBar(props) {
     const [selected, setSelected] = useState([]);
     
     function handleSelectionClick(newSelectedTrack) {
-        setSelected([...selected, newSelectedTrack])
+        if (!selected.includes(newSelectedTrack)) {
+            setSelected([...selected, newSelectedTrack])
+        }
     };
     
     function handleRemoveClick(removedTrack) {
@@ -42,7 +44,7 @@ function SearchBar(props) {
             <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             <div className='columns'>
                 <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
-                <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing} playlistName={props.playlistName} changePlaylistName={props.changePlaylistName}/>
+                <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing} playlistName={props.playlistName} changePlaylistName={props.changePlaylistName} handleSubmit={props.handleSubmit} namingPlaylist={props.namingPlaylist}/>
             </div>
         </div>
     )    

@@ -1,28 +1,60 @@
 .playlist {
+    width: 45%;
     background-color: #efefef4d;
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
     min-height: 20rem;
     max-height: 40rem;
+    border: 2px solid #b6b1b1;
 }
 
-.playlistName img {
-    width: 6%;
+.playlistName {
+    height: 10%;
+    display: flex;
+}
+
+.settings {
+    width: 20%;
+}
+
+.playlistName h2, .playlistName form {
+    width: 80%;
     position: relative;
-    bottom: 45%;
-    left: 90%;
+    left: 8%;
+}
+
+.playlistName form input {
+    width: 80%;
+    margin-top: 2%;
+    translate: 18%;
+}
+
+#more {
+    width: 30%;
+    position: relative;
+    left: 48%;
+    top: 23%;
     border-radius: 50%;
 }
 
-.playlistName img:hover {
+#more:hover {
     background-color: #00000049;
     cursor: pointer;
 }
 
+.center {
+    overflow-y: scroll;
+    height: 75%;
+}
+
+.addToSpotify {
+    height: 15%;
+}
+
 #addToSpotify {
     width: 30%;
-    margin-top: 1%;
+    margin-top: 3%;
     position: sticky;
 }
 
@@ -34,8 +66,26 @@
     }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 720px) {
+    .playlistName {
+        height: 15%;
+    }
+
+    .playlist {
+        width: 100%;
+        margin: 2% 0;
+    }
+
+    .settings img {
+        bottom: 100%;
+    }
+}
+@media only screen and (max-width: 470px) {
     #addToSpotify {
-        font-size: .7rem;
+        font-size: .8rem;
+    }
+
+    .settings img {
+        bottom: 70%;
     }
 }

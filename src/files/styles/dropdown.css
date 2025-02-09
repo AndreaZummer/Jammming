@@ -1,0 +1,95 @@
+.dropdown-false {
+    display: none;
+}
+
+.dropdown-true {
+    display: inline-block;
+    position: relative;
+    right: 10%;
+    top: 10%;
+    width: 180%;
+    z-index: 10;
+}
+
+.dropdown-true ul {
+    list-style: none;
+    border: 1px solid #000;
+    border-radius: 5%;
+    background-color: #ebe7e7;
+    color: #000;
+    position: relative;
+    top:0;
+    width: 95%;
+}
+
+.dropdown-true li {
+    font-size: .8rem;
+    padding: 2%;
+    display: flex;
+}
+
+.dropdown-true li:hover {
+    cursor: pointer;
+    background-color: #00000063;
+
+}
+
+.dropdown-true li img {
+    width: 16%;
+    position: relative;
+    left: 2%;
+    padding-right: 5%;
+}
+
+.dropdown-true label {
+    cursor: pointer;
+}
+
+#fileUpload {
+    display: none;
+}
+
+@media only screen and (max-width: 1110px) {
+    .dropdown-true ul{
+        width: 109%;
+    }
+
+    .dropdown-true li {
+        font-size: .7rem;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .dropdown-true ul {
+        width: 130%;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .dropdown-true {
+        width: 160%;
+    }
+
+    .dropdown-true ul {
+        width: 70%;
+    }
+
+    .dropdown-true li label img {
+        position: relative;
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 535px) {
+    .dropdown-true {
+        width: 120%;
+    }
+
+    .dropdown-true ul {
+        width: 100%;
+    }
+
+    .dropdown-true li{
+        font-size: .65rem;
+    }
+}
