@@ -1,9 +1,9 @@
 # Jammming
 
-![jammming landing page](.\screenshots\Screenshotjammming.jpg?raw=true)
-![jammming search](.\screenshots\jammming-search.jpg?raw=true)
-![jammming adding playlist cover](.\screenshots\jammming-adding-playlist.jpg?raw=true)
-![jammming adding playlist to Spotify](.\screenshots\jammming.jpg?raw=true)
+![jammming landing page](https://github.com/AndreaZummer/Jammming/blob/main/screenshots/Screenshotjammming.jpg)
+![jammming search](https://github.com/AndreaZummer/Jammming/blob/main/screenshots/jammming-search.jpg)
+![jammming adding playlist cover](https://github.com/AndreaZummer/Jammming/blob/main/screenshots/jammming-adding-playlist.jpg)
+![jammming adding playlist to Spotify](https://github.com/AndreaZummer/Jammming/blob/main/screenshots/jammming.jpg)
 
 Jammming is a React SPA for creating custom playlists.
 This project was created using the React framework. It is a single-page application(SPA) 
