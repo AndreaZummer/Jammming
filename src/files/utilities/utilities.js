@@ -167,7 +167,9 @@ async function addPlaylistCover() {
 
 async function addTracksToPlaylist(uriList,playlistName) {
   await addPlaylistToSpotify(playlistName);
-  await addPlaylistCover();
+  
+  if (localStorage.getItem('uploadImage')) {
+    await addPlaylistCover()};
   
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${localStorage.getItem('userID')}/playlists/${localStorage.getItem('playlistID')}/tracks`, {

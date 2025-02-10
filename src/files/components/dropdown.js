@@ -17,11 +17,14 @@ function Dropdown (props) {
 
     async function autoSubmit(event) {
         const uploadImage = event.target.files[0];
+        props.playlistCoverChecker(uploadImage);
+        
         function toBase64(uploadImage) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     const base = reader.result;
+                    props.displayPlaylistCover(base);
                     const base64 = base.replace(/^data:image\/(jpg|jpeg);base64,/, "");    
                     resolve(base64)
                 };
@@ -30,11 +33,13 @@ function Dropdown (props) {
             })
         };
         const base64 = await toBase64(uploadImage);
-        localStorage.setItem('uploadImage', base64);
-    }
+        if (uploadImage.size < 191000 & uploadImage.type === "image/jpeg") {
+            localStorage.setItem('uploadImage', base64);
+        }
+    };
 
     return (
-        <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} /*onMouseLeave={props.leave}*/>
+        <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} onMouseLeave={props.leave}>
             <ul className='menu'>
                 <li onClick={props.nameChangeHandle}><img alt='rename' src={rename}/>Rename</li>
                 <li onMouseOver={addingCoverHover} onMouseLeave={addingCoverHover2}><label htmlFor='fileUpload'><img alt='add' src={addPhoto}/>Add playlist cover</label></li>

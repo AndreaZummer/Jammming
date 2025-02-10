@@ -3,6 +3,8 @@ import Tracklist from '../components/tracklist';
 import AddToSpotifyButton from '../components/addToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
 import moreOptionsIcon from './more-horizontal-svgrepo-com.svg';
+import accept from './accept-check-good-mark-ok-tick-svgrepo-com.svg';
+import denied from './stop-svgrepo-com.svg';
 import Dropdown from '../components/dropdown';
 import '../styles/playlist.css';
 
@@ -11,6 +13,8 @@ function PLaylist(props) {
     const [uriList, setUriList] = useState([]);
     const [visible, setVisible] = useState(false);
     const [nameChange, setNameChange] =useState(false);
+    const [playlistCoverAccepted, setPlaylistCoverAccepted] = useState(null);
+    const [displayCover, setDisplayCover] = useState('');
 
     useEffect(
         () => {
@@ -48,6 +52,18 @@ function PLaylist(props) {
         }
     };
 
+    function displayPlaylistCover(uploadImage) {
+        setDisplayCover(uploadImage);
+    };
+
+    function playlistCoverChecker (uploadImage) {
+        if (uploadImage.size < 191000 & uploadImage.type === "image/jpeg") {
+            setPlaylistCoverAccepted(true)
+        } else {
+            setPlaylistCoverAccepted(false)
+        }
+    };
+
     async function addToSpotify() {
         await addTracksToPlaylist(uriList,props.playlistName);
     };
@@ -56,9 +72,14 @@ function PLaylist(props) {
         <div className='playlist'>
             <div className='playlistName'>
                 {rename()}
+                <div className={`playlistCover-${playlistCoverAccepted}`}>
+                    {displayCover && <img title='cover image' alt='playlist cover' src={displayCover}/>}
+                    
+                    {playlistCoverAccepted? <img className='cover' title='playlist cover accepted' alt='accepted' src={accept}/> : <img className='cover' title='wrong format/size' alt='denied' src={denied}/>}
+                </div>
                 <div className='settings'>
                     <img id='more' src={moreOptionsIcon} alt='more option' onMouseOver={dropdownHandling} onMouseLeave={dropdownHandling2}/>
-                    <Dropdown visible={visible} hover={dropdownHandling} leave={dropdownHandling2} nameChangeHandle={nameChangeHandle}/>
+                    <Dropdown visible={visible} hover={dropdownHandling} leave={dropdownHandling2} nameChangeHandle={nameChangeHandle} displayPlaylistCover={displayPlaylistCover} playlistCoverChecker={playlistCoverChecker}/>
                 </div>
             </div>
             <div className='center'>
