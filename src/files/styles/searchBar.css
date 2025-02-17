@@ -4,25 +4,23 @@
 
 .columns {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100%;
 }
 
 .searchResults {
-    width: 45%;
+    width: 40%;
     overflow-y: scroll;
     border: 2px solid #b6b1b1;
+    background-color: #85e0c093;
+    margin-bottom: 2rem;
+    height: 40rem;
 }
 
 .searchBar h2 {
     text-align: center;
     padding: 2% 0;
-}
-
-.searchResults {
-    background-color: #aeeddac7;
-    margin-bottom: 2rem;
-    height: 40rem;
+    color: #1f211f;
 }
 
 .searchBar input {
@@ -31,7 +29,7 @@
     width: 40%;
     height: 2.5rem;
     padding: 1%;
-    background-color: #aeedda;
+    background-color: #53cba1;
     translate: 75%;
     font-size: large;
     letter-spacing: .2rem;
@@ -60,12 +58,14 @@
     margin: 3% 0;
     padding: 1% 0;
     color: #000;
+    background-color: buttonface;
 }
 
 .searchBar button:hover {
-    background-color: #000;
+    background-color: #616965;
     color: #fff;
-    transition: background-color .5s;   
+    transition: background-color .5s;
+    cursor: pointer;   
 }
 
 ::-webkit-scrollbar {
@@ -73,7 +73,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #c18d59;
+    background-color: #f0f0f0;
     border-radius: 2px;
 } 
 

@@ -1,12 +1,15 @@
 .track {
-    border: 1.5px solid #000;
-    border-radius: 3px;
-    background-color: #ca9872;
+    border-bottom: 1.5px solid #000;
     height: 3.6rem;
     margin: 1.5% 5%;
     overflow: hidden;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+.addOrRemoveButton {
+    width: 17%;
+    display: flex;
+    justify-content: center;
 }
 
 #add, #remove {
@@ -22,26 +25,32 @@
 }
 
 .trackInfo {
-    width: 65%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 2%;
 }
 
 .track h3 {
     font-size: .8rem;
     font-weight: 800;
+    max-height: 1.1rem;
+    overflow: hidden;
 }
 
 .track h4 {
     font-size: .65rem;
+    max-height: 1rem;
+    overflow: hidden;
 }
 
 .track h5 {
     font-size: .6rem;
-}
+    max-height: .8rem;
+    overflow: hidden;
 
-.track img {
-    padding-left: 2%;
 }
-
 
 @media only screen and (max-width: 1050px) {
     .add {

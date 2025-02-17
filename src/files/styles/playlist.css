@@ -1,6 +1,6 @@
 .playlist {
-    width: 45%;
-    background-color: #efefef4d;
+    width: 40%;
+    background-color: #85e0c093;
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
@@ -43,7 +43,8 @@
 }
 
 .playlistName h2, .playlistName form {
-    width: 67%;
+    width: 80%;
+    margin-left: 3%;
 }
 
 .playlistName form input {
@@ -78,6 +79,7 @@
     width: 30%;
     margin-top: 3%;
     position: sticky;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1050px) {
