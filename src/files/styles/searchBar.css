@@ -23,14 +23,19 @@
     color: #1f211f;
 }
 
-.searchBar input {
-    position: initial;
+.searchBar form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.searchBar input[type='text']{
     display: block;
     width: 40%;
     height: 2.5rem;
     padding: 1%;
     background-color: #53cba1;
-    translate: 75%;
     font-size: large;
     letter-spacing: .2rem;
     border-radius: 1rem;
@@ -49,12 +54,10 @@
 
 .searchBar button {
     width: 20%;
-    position: initial;
     border-radius: 5%;
     letter-spacing: 1.5px;
     font-size: 16px;
     font-weight: 600;
-    translate: 200%;
     margin: 3% 0;
     padding: 1% 0;
     color: #000;
@@ -79,44 +82,67 @@
 
 /* Media queries */
 
-@media only screen and (max-width: 1050px) {
-    .searchResults, .playlist {
-        width: 49%;
+@media only screen and (max-width: 1400px) {
+    .searchResults {
+        width: 44%;
+    }
+    .playlist {
+        width: 44%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .columns {
+        justify-content: space-between;
+    }
+    .searchResults {
+        width: 48%;
+    }
+    .playlist {
+        width: 48%;
     }
 }
 
 @media only screen and (max-width: 720px) {
-    .searchBar input {
+    .searchBar input[type='text'] {
         width: 45%;
-        translate: 59%;
     }
-
     .columns {
         flex-direction: column;
     }
-
     .playlist {
-        width: 100%;
+        width: 90%;
         height: 12rem;
-        margin: 2% 0;
+        margin: 2% auto;
     }
-
     .searchResults {
-        width: 100%;
+        width: 90%;
         height: 14rem;
+        margin: auto;
     }
 }
 
 @media only screen and (max-width: 530px) {  
-    .searchBar input {
+    .searchBar input[type='text'] {
         width: 65%;
-        translate: 30%;
         height: 2rem;
         font-size: 1rem;
     }
-
     .searchBar button {
         width: 25%;
-        translate: 150%;
+    }
+}
+
+@media only screen and (max-width: 425px) {  
+    .searchBar input[type='text'] {
+        width: 75%;
+    }
+    .playlist {
+        margin: 2% 0;
+        width: 100%;
+    }
+    .searchResults {
+        margin: 2% 0;
+        width: 100%;
     }
 }

@@ -6,7 +6,10 @@ function SearchResults(props) {
         <div className='searchResults'>
             <h2>Search Results</h2>
             {props.searchResults.map((track,index) => { return (
-                <Track track={track} key={`track${index}`} selectionClick={props.selectionClick}/>
+                <Track 
+                    track={track} 
+                    key={`track${index}`} 
+                    selectionClick={props.selectionClick}/>
             )})}
         </div>
     )

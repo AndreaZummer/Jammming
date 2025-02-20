@@ -18,11 +18,21 @@ function Track(props) {
     function addOrRemoveButton () {
         if (props.removeClick) {
             return (
-                <img id='remove' title='remove' onClick={handleRemove} alt='remove' src={removeButton}/>
+                <img 
+                    id='remove' 
+                    title='remove' 
+                    onClick={handleRemove} 
+                    alt='remove' 
+                    src={removeButton}/>
             )}
         else {
             return (
-                <img id='add' title='add' src={addButton} alt='add' onClick={handleAdd} />
+                <img 
+                    id='add' 
+                    title='add' 
+                    src={addButton} 
+                    alt='add' 
+                    onClick={handleAdd}/>
             )
         }
     };

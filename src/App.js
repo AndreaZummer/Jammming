@@ -56,12 +56,21 @@ function App() {
           <div className='creating'>
             <form onSubmit={handleSubmit}>
               <h2 className={`success-${reset}`}>Playlist successfully added to Spotify!</h2>
-              <input type="text" placeholder="Enter Playlist name..." onChange={namingPlaylist} value={name}/>
+              <input 
+                type="text" 
+                placeholder="Enter Playlist name..." 
+                onChange={namingPlaylist} 
+                value={name}/>
               <button>Create Playlist</button>
             </form>
           </div> )}
         {playlistName &&
-          <SearchBar handleReset={handleReset} playlistName={playlistName} changePlaylistName={changePlaylistName} handleSubmit={handleSubmit} namingPlaylist={namingPlaylist}/>}
+          <SearchBar 
+            handleReset={handleReset} 
+            playlistName={playlistName} 
+            changePlaylistName={changePlaylistName} 
+            handleSubmit={handleSubmit} 
+            namingPlaylist={namingPlaylist}/>}
         </main>
     </div>
   )

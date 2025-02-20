@@ -5,7 +5,10 @@ function Tracklist(props) {
     return (
         <div className='tracklist'>
             {props.tracklistSelected.map((track) => {return (
-                <Track track={track} key={track.uri} removeClick={props.removeClick}/>
+                <Track 
+                    track={track} 
+                    key={track.uri} 
+                    removeClick={props.removeClick}/>
             )
         })}
         </div>

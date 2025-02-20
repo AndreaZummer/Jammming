@@ -1,7 +1,7 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import SearchResults from '../components/searchResults';
 import PLaylist from './playlist';
-import { getSearchResults} from '../utilities/utilities';
+import {getSearchResults} from '../utilities/utilities';
 import '../styles/searchBar.css';
 
 function SearchBar(props) {
@@ -39,12 +39,23 @@ function SearchBar(props) {
     return (
         <div className='searchBar'>
             <form onSubmit={handleSearchClick}>
-                <input type="text" placeholder='Song Title / Artist' value={search} onChange={handleChange}/>
+                <input 
+                    type="text" 
+                    placeholder='Song Title / Artist' 
+                    value={search} 
+                    onChange={handleChange}/>
+                <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             </form>
-            <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             <div className='columns'>
                 <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
-                <PLaylist removeClick={handleRemoveClick} selected={selected} refreshing={refreshing} playlistName={props.playlistName} changePlaylistName={props.changePlaylistName} handleSubmit={props.handleSubmit} namingPlaylist={props.namingPlaylist}/>
+                <PLaylist 
+                    removeClick={handleRemoveClick} 
+                    selected={selected} 
+                    refreshing={refreshing} 
+                    playlistName={props.playlistName} 
+                    changePlaylistName={props.changePlaylistName} 
+                    handleSubmit={props.handleSubmit} 
+                    namingPlaylist={props.namingPlaylist}/>
             </div>
         </div>
     )    
