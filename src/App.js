@@ -5,11 +5,13 @@ import {getProfile, expirationChecker} from './files/utilities/utilities';
 import musicalNote from './musical-note-quaver-svgrepo-com.svg';
 
 function App() {
+
   useEffect (()=> {
     getProfile();
-    setInterval(() => {
-      expirationChecker()
-    }, 400)
+    // console.log(localStorage.getItem('access_token'))
+    // setInterval(() => {
+      // expirationChecker()
+    // }, 400)
   }, []);
   
   const [reset, setReset] = useState(false);

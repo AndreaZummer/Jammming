@@ -1,5 +1,116 @@
-// Request for Access Token using Implicit Grant Flow
 
+// User Authorization
+
+async function userAuth() {
+  const stateKey = 'auth_state_key';
+
+  function codeVerification(length) {
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const values = crypto.getRandomValues(new Uint8Array(length));
+    return values.reduce((acc, x) => acc + possible[x % possible.length], "");
+  };
+
+  const codeVerifier  = codeVerification(128);
+  localStorage.setItem('code_verifier', codeVerifier);
+
+  async function sha256 (plain){
+    const encoder = new TextEncoder()
+    const data = encoder.encode(plain)
+    await window.crypto.subtle.digest('SHA-256', data)
+  };
+  
+  const hashed = sha256(codeVerifier);
+
+  function base64encode(input) {
+    return btoa(String.fromCharCode(...new Uint8Array(input)))
+      .replace(/=/g, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_');
+  };
+
+  function generateRandomString(length) {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    localStorage.setItem(stateKey, text);
+    return text;
+  };
+
+  async function userAuthRequest() {
+    const url= new URL("https://accounts.spotify.com/authorize");
+
+    const params = {
+      client_id: '32fd7115babc4ea9a080fde3bb3d88df',
+      redirect_uri: 'http://localhost:3000',
+      response_type: 'code',
+      scope: 'ugc-image-upload playlist-modify-public playlist-modify-private',
+      codeChallenge: base64encode(hashed),
+      state: generateRandomString(16),
+      code_challenge_method: 'S256',
+    }
+    
+    url.search = new URLSearchParams(params).toString();
+    window.location.href=url.toString();
+  };
+  await userAuthRequest();
+};
+
+async function getCode() {
+  const stateKey = 'auth_state_key';
+  const urlParams = new URLSearchParams(window.location.search);
+  let code = urlParams.get('code');
+  localStorage.setItem('code', code);
+  let state = urlParams.get('state');
+    if (!code || state==null || state!==localStorage.getItem(stateKey)) {
+      new Error ('Authorization Failure');
+    }
+};
+
+async function requestForToken() {
+  const code = localStorage.getItem('code');
+  const url = "https://accounts.spotify.com/api/token";
+  const codeVerifier = localStorage.getItem('code_verifier');
+  const payload = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      client_id: '32fd7115babc4ea9a080fde3bb3d88df',
+      redirect_uri: 'http://localhost:3000',
+      grant_type: 'authorization_code',
+      code: code,
+      code_verifier: codeVerifier,
+    }),
+  }
+  
+  try{
+    const response = await fetch(url, payload);
+    if (!response.ok) {
+      throw new Error (`HTTP error! Status: ${response.status}`);
+    }
+    const body = await response.json();
+    localStorage.setItem('access_token', body.access_token);
+    localStorage.setItem('refresh_token', body.refresh_token);
+    localStorage.removeItem('code');
+  }
+  catch(error) {
+    console.log('Error getting access token', error)
+  }
+};
+  
+
+
+
+
+
+
+
+
+/*
+// Request for Access Token 
 async function getAccessToken() {
   let stateKey = 'spotify_auth_state';
 
@@ -32,7 +143,6 @@ async function getAccessToken() {
     function generateRandomString(length) {
       let text = '';
       const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
       for (let i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
       }
@@ -65,18 +175,17 @@ async function expirationChecker() {
   if(expirationTime <= actualTime) {
     await getAccessToken();
   }
-};
+};*/
 // Checks if user is logged in
 
 async function logginChecker() {
-  const params = new URLSearchParams(window.location.hash.substring(1));
-  const accessToken = params.get("access_token");
-
-  if (!accessToken) {
-      await getAccessToken();
+  const params = new URLSearchParams(window.location.search.substring(1));
+  if (params.size===0) {
+      await userAuth();
   }
-  localStorage.setItem('access_token', accessToken)
-  return accessToken
+
+  await getCode();
+  await requestForToken();
 };
 
 async function getProfile() {
@@ -194,4 +303,4 @@ async function addTracksToPlaylist(uriList,playlistName) {
   localStorage.removeItem('playlistID');
 };
 
-export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify, expirationChecker};
+export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify, userAuth/*expirationChecker*/};
