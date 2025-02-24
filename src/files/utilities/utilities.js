@@ -10,7 +10,7 @@ async function userAuth() {
     return values.reduce((acc, x) => acc + possible[x % possible.length], "");
   };
 
-  const codeVerifier  = codeVerification(128);
+  const codeVerifier  = codeVerification(64);
   localStorage.setItem('code_verifier', codeVerifier);
 
   async function sha256 (plain){
@@ -72,29 +72,32 @@ async function requestForToken() {
   const code = localStorage.getItem('code');
   const url = "https://accounts.spotify.com/api/token";
   const codeVerifier = localStorage.getItem('code_verifier');
-  const payload = {
+
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
       client_id: '32fd7115babc4ea9a080fde3bb3d88df',
-      redirect_uri: 'http://localhost:3000',
       grant_type: 'authorization_code',
       code: code,
+      redirect_uri: 'http://localhost:3000',
       code_verifier: codeVerifier,
     }),
-  }
+  });
+
   
   try{
-    const response = await fetch(url, payload);
+    // const response = await fetch(url, payload);
     if (!response.ok) {
       throw new Error (`HTTP error! Status: ${response.status}`);
     }
     const body = await response.json();
-    localStorage.setItem('access_token', body.access_token);
-    localStorage.setItem('refresh_token', body.refresh_token);
-    localStorage.removeItem('code');
+    // localStorage.setItem('access_token', body.access_token);
+    // localStorage.setItem('refresh_token', body.refresh_token);
+    // localStorage.removeItem('code');
+    // localStorage.removeItem('code_verifier');
   }
   catch(error) {
     console.log('Error getting access token', error)
@@ -183,13 +186,13 @@ async function logginChecker() {
   if (params.size===0) {
       await userAuth();
   }
-
+  
   await getCode();
-  await requestForToken();
 };
 
 async function getProfile() {
-  await logginChecker();
+  // await logginChecker();
+  // await requestForToken();
   const response = await fetch('https://api.spotify.com/v1/me', {
     headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
@@ -303,4 +306,4 @@ async function addTracksToPlaylist(uriList,playlistName) {
   localStorage.removeItem('playlistID');
 };
 
-export {getSearchResults, addTracksToPlaylist, getProfile, addPlaylistToSpotify, userAuth/*expirationChecker*/};
+export {getSearchResults, logginChecker, requestForToken, addTracksToPlaylist, getProfile, addPlaylistToSpotify, userAuth/*expirationChecker*/};

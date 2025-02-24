@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import SearchBar from './files/containers/searchBar';
-import {getProfile, expirationChecker} from './files/utilities/utilities';
+import {getProfile} from './files/utilities/utilities';
 import musicalNote from './musical-note-quaver-svgrepo-com.svg';
 
 function App() {
