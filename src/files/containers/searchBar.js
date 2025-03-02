@@ -11,13 +11,14 @@ function SearchBar(props) {
     const [selected, setSelected] = useState([]);
     
     function handleSelectionClick(newSelectedTrack) {
-        if (!selected.includes(newSelectedTrack)) {
-            setSelected([...selected, newSelectedTrack])
-        }
+        setSelected([...selected, newSelectedTrack])
     };
     
     function handleRemoveClick(removedTrack) {
-        setSelected((selected) => {return selected.filter(track => track!==removedTrack)})
+        const removeIndex = selected.lastIndexOf(removedTrack);
+        setSelected((selected)=> {
+            return selected.filter((track,index) => index!==removeIndex)} 
+        )
     };
 
     function handleChange(event) {

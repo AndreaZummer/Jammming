@@ -4,10 +4,10 @@ import Track from './track';
 function Tracklist(props) {
     return (
         <div className='tracklist'>
-            {props.tracklistSelected.map((track) => {return (
+            {props.tracklistSelected.map((track,index) => {return (
                 <Track 
                     track={track} 
-                    key={track.uri} 
+                    key={`${index}${track.uri}`} 
                     removeClick={props.removeClick}/>
             )
         })}
