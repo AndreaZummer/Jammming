@@ -47,7 +47,7 @@ async function userAuth() {
       redirect_uri: redirect_uri,
       response_type: 'code',
       scope: 'ugc-image-upload playlist-modify-public playlist-modify-private',
-      codeChallenge: base64encode(hashed),
+      code_challenge: base64encode(hashed),
       state: generateRandomString(16),
       code_challenge_method: 'S256',
     }
@@ -68,6 +68,7 @@ async function getCode() {
       new Error ('Authorization Failure');
     }
 };
+let expiration = 0;
 
 async function requestForToken() {
   const code = localStorage.getItem('code');
@@ -82,7 +83,7 @@ async function requestForToken() {
     body: new URLSearchParams({
       client_id: '32fd7115babc4ea9a080fde3bb3d88df',
       grant_type: 'authorization_code',
-      code: code,
+      code,
       redirect_uri: 'http://localhost:3000',
       code_verifier: codeVerifier,
     }),
@@ -97,7 +98,7 @@ async function requestForToken() {
     localStorage.setItem('access_token', body.access_token);
     localStorage.setItem('refresh_token', body.refresh_token);
     localStorage.removeItem('code');
-    localStorage.setItem('expiration', Date.now()+3600000)
+    expiration = Date.now()+3600000;
   }
   catch(error) {
     console.log('Error getting access token', error)
@@ -205,6 +206,7 @@ async function requestForToken() {
 */
 async function refreshToken() {
   const refresh_token = localStorage.getItem('refresh_token');
+  console.log('refreshtoken call');
   const url = "https://accounts.spotify.com/api/token";
 
   const response = await fetch(url, {
@@ -213,7 +215,7 @@ async function refreshToken() {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(({
-      client_id: '32fd7115babc4ea9a080fde3bb3d88df',
+      client_id: client_id,
       grant_type: 'refresh_token',
       refresh_token: refresh_token
     })),
@@ -224,9 +226,20 @@ async function refreshToken() {
   const body = await response.json();
   localStorage.setItem('access_token', body.access_token);
   localStorage.setItem('refresh_token', body.refresh_token);
-  localStorage.setItem('expiration', Date.now()+3600000)
+  expiration = Date.now()+3600000;
 }
 
+async function getProfile() {
+  const response = await fetch('https://api.spotify.com/v1/me', {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+    }
+  });
+  
+  const data = await response.json();
+  localStorage.setItem('userID', data.id);
+  return data.id;
+};
 // Checks if user is logged in
 
 async function logginChecker() {
@@ -242,7 +255,7 @@ if(!localStorage.getItem('access_token')) {
 logginChecker();
 }
 
-if(Date.now+60000>=localStorage.getItem('expiration')) {
+if(Date.now+60000>=expiration) {
   refreshToken()
 }
 
@@ -269,6 +282,7 @@ async function getSearchResults(searchedText) {
 };
 
 async function addPlaylistToSpotify(playlistName) {
+  await getProfile();
 
   try {
     const response = await fetch(`https://api.spotify.com/v1/users/${localStorage.getItem('userID')}/playlists`, {
@@ -306,7 +320,7 @@ async function addPlaylistCover() {
           'Authorization':'Bearer ' + localStorage.getItem('access_token'),
           'Content-Type': 'image/jpeg',
         },
-        body: uploadImage,
+        body: uploadImage
     });
     if (!response.ok) {
       throw new Error (`HTTP error! Status: ${response.status}`);
@@ -346,6 +360,7 @@ async function addTracksToPlaylist(uriList,playlistName) {
     console.log("Error adding to Spotify:", error);
   };
   localStorage.removeItem('playlistID');
+  localStorage.removeItem('userID');
 };
-
+// localStorage.clear();
 export {getSearchResults, requestForToken, addTracksToPlaylist, addPlaylistToSpotify, userAuth, getCode};
