@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Tracklist from '../components/Tracklist';
+import Track from '../components/Track';
 import AddToSpotifyButton from '../components/AddToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
 import moreOptionsIcon from './resources/more-horizontal-svgrepo-com.svg';
@@ -98,7 +98,13 @@ function PLaylist(props) {
                 </div>
             </div>
             <div className='center'>
-                <Tracklist tracklistSelected={props.selected} removeClick={props.removeClick} />
+            <div className='tracklist'>
+                    {props.selected.map((track, index) => {return (
+                        <Track  track={track} 
+                                key={`${index}${track.uri}`} 
+                                removeClick={props.removeClick}/>
+                    )})}
+                </div>
             </div>
             <div className='addToSpotify'>
                 <AddToSpotifyButton 

@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-}
+} 
 
 .searchResults {
     width: 40%;
@@ -41,7 +41,7 @@
     border-radius: 1rem;
 } 
 
-.searchBar input:focus{
+.searchBar input[type='text']:focus{
     background-color: #265b4fd7;
     color: #fff;
     font-size: large;
@@ -69,6 +69,38 @@
     color: #fff;
     transition: background-color .5s;
     cursor: pointer;   
+}
+
+.suggestions-false {
+    display: none;
+}
+
+.suggestions-true {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 1rem;
+    background-color: #ebe7e7;
+    color: #000;
+    z-index: 10;
+    width: 30%;
+    translate: 83%;
+}
+
+.suggestions-true input {
+    border: transparent;
+    font-size: 1rem;
+    text-align: left;
+    padding: 1% 3%;
+}
+
+.suggestions-true input:hover {
+    cursor: pointer;
+    background-color: #00000063;
+}
+
+.selectedSuggestion {
+    background-color: #00000063;
 }
 
 ::-webkit-scrollbar {
@@ -103,6 +135,13 @@
     }
 }
 
+@media only screen and (max-width: 775px) {
+    .suggestions-true {
+        width: 36%;
+        translate: 74%;
+    }
+}
+
 @media only screen and (max-width: 720px) {
     .searchBar input[type='text'] {
         width: 45%;
@@ -130,6 +169,10 @@
     }
     .searchBar button {
         width: 25%;
+    }
+    .suggestions-true {
+        width: 55%;
+        translate: 35%;
     }
 }
 
