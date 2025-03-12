@@ -15,8 +15,8 @@ function PLaylist(props) {
     const [displayCover, setDisplayCover] = useState(null);
 
     useEffect(
-        () => {
-            setUriList(props.selected.map(track => track.uri));
+        () => {if(props.selected) {
+            setUriList(props.selected.map(track => track.uri))};
         }, [props.selected]
     );
 
@@ -85,7 +85,7 @@ function PLaylist(props) {
                     <img 
                         id='more' 
                         src={moreOptionsIcon} 
-                        alt='more option' 
+                        alt='more options' 
                         onMouseOver={dropdownHandling} 
                         onMouseLeave={dropdownHandling2}/>
                     <Dropdown 
@@ -98,8 +98,8 @@ function PLaylist(props) {
                 </div>
             </div>
             <div className='center'>
-            <div className='tracklist'>
-                    {props.selected.map((track, index) => {return (
+            <div className='tracklist' data-testid='tracklist'>
+                    {props.selected && props.selected.map((track, index) => {return (
                         <Track  track={track} 
                                 key={`${index}${track.uri}`} 
                                 removeClick={props.removeClick}/>
