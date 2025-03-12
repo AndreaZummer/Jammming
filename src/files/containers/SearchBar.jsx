@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import SearchResults from '../components/SearchResults';
+import Track from '../components/Track';
 import PLaylist from './Playlist';
 import {getSearchResults} from '../utilities/utilities';
 import '../styles/searchBar.css';
@@ -116,7 +116,15 @@ function SearchBar(props) {
             </form>    
             <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             <div className='columns'>
-                <SearchResults searchResults={searchResults} selectionClick={handleSelectionClick}/>
+                <div className='searchResults'>
+                    <h2>Search Results</h2>
+                    {searchResults.map((track,index) => { return (
+                        <Track 
+                            track={track} 
+                            key={`track${index}`} 
+                            selectionClick={handleSelectionClick}/>
+                    )})}
+                </div>
                 <PLaylist 
                     removeClick={handleRemoveClick} 
                     selected={selected} 
