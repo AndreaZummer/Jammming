@@ -47,7 +47,7 @@ function Dropdown (props) {
                         <img alt='rename' src={rename}/>Rename
                     </li>
                     <li onMouseOver={addingCoverHover} onMouseLeave={addingCoverHover2}>
-                        <label htmlFor='fileUpload'>
+                        <label htmlFor='fileUpload' data-testid='fileLabel'>
                             <img alt='add' src={addPhoto}/>Add playlist cover</label>
                     </li>
                     <input 
@@ -55,6 +55,7 @@ function Dropdown (props) {
                         onChange={autoSubmit} 
                         name='coverPicture' 
                         id='fileUpload' 
+                        data-testid='fileInput'
                         accept='image/jpeg'/>
                 </ul>
             </div>

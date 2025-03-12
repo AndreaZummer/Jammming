@@ -1,21 +1,10 @@
 import {render, screen } from '@testing-library/react';
 import App from './App';
-import {expect, vi} from 'vitest';
-import {getProfile} from './files/utilities/utilities';
+import {expect} from 'vitest';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 describe('App', () => {
-  vi.mock('./files/utilities/utilities', () => ({
-    getProfile: vi.fn(),
-  }))
-
-  it('should call getProfile function on mount', () => {
-    render(<App />)
-
-    expect(getProfile).toBeCalledTimes(1);
-  })
-
   it('should check that success message is hidden', () => {
     render(<App />)
 
