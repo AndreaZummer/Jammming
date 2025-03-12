@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import SearchResults from '../components/searchResults';
-import PLaylist from './playlist';
+import SearchResults from '../components/SearchResults';
+import PLaylist from './Playlist';
 import {getSearchResults} from '../utilities/utilities';
 import '../styles/searchBar.css';
 

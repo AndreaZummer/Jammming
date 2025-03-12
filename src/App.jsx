@@ -1,22 +1,14 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import SearchBar from './files/containers/searchBar';
-import {getProfile} from './files/utilities/utilities';
+import SearchBar from './files/containers/SearchBar';
 import musicalNote from './musical-note-quaver-svgrepo-com.svg';
 
 function App() {
-
-  useEffect (()=> {
-    getProfile();
-    // console.log(localStorage.getItem('access_token'))
-    // setInterval(() => {
-      // expirationChecker()
-    // }, 400)
-  }, []);
   
   const [reset, setReset] = useState(false);
   const [name, setName] = useState('');
   const [playlistName, setPlaylistName] = useState('');
+
   
   useEffect(() => {
     setTimeout(() => {

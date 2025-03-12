@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import Tracklist from '../components/tracklist';
-import AddToSpotifyButton from '../components/addToSpotifyButton';
+import Tracklist from '../components/Tracklist';
+import AddToSpotifyButton from '../components/AddToSpotifyButton';
 import {addTracksToPlaylist} from '../utilities/utilities';
 import moreOptionsIcon from './resources/more-horizontal-svgrepo-com.svg';
 import note from './resources/note.jpg';
-import Dropdown from '../components/dropdown';
+import Dropdown from '../components/Dropdown';
 import '../styles/playlist.css';
 
 function PLaylist(props) {
