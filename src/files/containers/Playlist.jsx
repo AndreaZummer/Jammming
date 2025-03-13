@@ -21,7 +21,11 @@ function PLaylist(props) {
     );
 
     function dropdownHandling () {
-        visible? setVisible(true): setVisible(false);
+        setVisible(true)
+    };
+
+    function dropdownHandling2 () {
+        setVisible(false)
     };
 
     function nameChangeHandle() {
@@ -83,11 +87,11 @@ function PLaylist(props) {
                         src={moreOptionsIcon} 
                         alt='more options' 
                         onMouseOver={dropdownHandling} 
-                        onMouseLeave={dropdownHandling}/>
+                        onMouseLeave={dropdownHandling2}/>
                     <Dropdown 
                         visible={visible} 
                         hover={dropdownHandling} 
-                        leave={dropdownHandling} 
+                        leave={dropdownHandling2} 
                         nameChangeHandle={nameChangeHandle} 
                         displayPlaylistCover={displayPlaylistCover} 
                         coverDenied={coverDenied}/>
