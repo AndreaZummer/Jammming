@@ -21,11 +21,7 @@ function PLaylist(props) {
     );
 
     function dropdownHandling () {
-        setVisible(true);
-    };
-
-    function dropdownHandling2() {
-        setVisible(false);
+        visible? setVisible(true): setVisible(false);
     };
 
     function nameChangeHandle() {
@@ -87,11 +83,11 @@ function PLaylist(props) {
                         src={moreOptionsIcon} 
                         alt='more options' 
                         onMouseOver={dropdownHandling} 
-                        onMouseLeave={dropdownHandling2}/>
+                        onMouseLeave={dropdownHandling}/>
                     <Dropdown 
                         visible={visible} 
                         hover={dropdownHandling} 
-                        leave={dropdownHandling2} 
+                        leave={dropdownHandling} 
                         nameChangeHandle={nameChangeHandle} 
                         displayPlaylistCover={displayPlaylistCover} 
                         coverDenied={coverDenied}/>
@@ -100,9 +96,10 @@ function PLaylist(props) {
             <div className='center'>
             <div className='tracklist' data-testid='tracklist'>
                     {props.selected && props.selected.map((track, index) => {return (
-                        <Track  track={track} 
-                                key={`${index}${track.uri}`} 
-                                removeClick={props.removeClick}/>
+                        <Track  
+                            track={track} 
+                            key={`${index}${track.uri}`} 
+                            removeClick={props.removeClick}/>
                     )})}
                 </div>
             </div>
