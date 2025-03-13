@@ -27,22 +27,24 @@ function SearchBar(props) {
     
     function filterSuggestions() {
         let suggList = [];
-        for (let suggestion of suggestions) {
-            let lowerSuggestion = suggestion.name.toLowerCase();
-            if(lowerSuggestion.includes(search)) {
-                if(!suggList.includes(lowerSuggestion)) {
-                    suggList.push(lowerSuggestion);
-                }
-            } else {
-                for (let artist of suggestion.artists) {
-                    let lowerSuggestionArtist = artist.name.toLowerCase();
-                    if(lowerSuggestionArtist.includes(search)) {
-                        if(!suggList.includes(artist.name)) {
-                            suggList.push(artist.name);
+        if(suggestions) {
+            for (let suggestion of suggestions) {
+                let lowerSuggestion = suggestion.name.toLowerCase();
+                if(lowerSuggestion.includes(search)) {
+                    if(!suggList.includes(lowerSuggestion)) {
+                        suggList.push(lowerSuggestion);
+                    }
+                } else {
+                    for (let artist of suggestion.artists) {
+                        let lowerSuggestionArtist = artist.name.toLowerCase();
+                        if(lowerSuggestionArtist.includes(search)) {
+                            if(!suggList.includes(artist.name)) {
+                                suggList.push(artist.name);
+                            }
                         }
                     }
                 }
-            }
+            }    
         }
         return suggList
     };
@@ -63,7 +65,6 @@ function SearchBar(props) {
     };
 
     async function handleSearchClick(e) {
-        e.preventDefault();
         setSearchResults(await getSearchResults(search));
         setSearch('');
         setVisibleSuggestions(false);
@@ -76,6 +77,7 @@ function SearchBar(props) {
     };
 
     async function suggestionClickHandle(event) {
+        event.preventDefault();
         if(suggestionIndex === -1) {
             let suggestionSearch = event.target.value;
             setSearchResults(await getSearchResults(suggestionSearch));
@@ -97,28 +99,41 @@ function SearchBar(props) {
             if(suggestionIndex !== -1) {
                 setSuggestionIndex(prevIndex => prevIndex-1)
             }
-        } else if (event.key === 'Enter' & event.target.value === search) {
-            handleSearchClick()
+        } else if (event.key === 'Enter' && event.target.value === search) {
+            await handleSearchClick()
         }
+    }
+
+    function preventRerender(e) {
+        e.preventDefault();
     }
 
     return (
         <div className='searchBar'>
-            <form>
+            <form onSubmit={preventRerender}>
                 <input 
                     type="text" 
                     placeholder='Song Title / Artist' 
                     value={search} 
                     onChange={handleChange}
                     onKeyDown={searchingHandle}/>
-                <p className={`suggestions-${visibleSuggestions}`}>{filterSuggestions().map((suggestion, index) => {return index < 10 && <input type='submit' value={suggestion} className={suggestionIndex===index? 'selectedSuggestion' : 'nonselectedSuggestion'} onKeyDown={searchingHandle} onClick={suggestionClickHandle} key={suggestion +`${index}`} />})} 
+                <p className={`suggestions-${visibleSuggestions}`}>
+                    {filterSuggestions().map((suggestion, index) => {
+                        return index < 10 && 
+                            <input type='submit' 
+                                   value={suggestion} 
+                                   className={suggestionIndex===index? 'selectedSuggestion' : 'nonselectedSuggestion'} 
+                                   onKeyDown={searchingHandle} 
+                                   onClick={suggestionClickHandle} 
+                                   key={suggestion +`${index}`} />
+                    })} 
                 </p>
             </form>    
-            <button onClick={handleSearchClick} disabled={search? false: true}> Search </button>
+            <button className='searchButton'onClick={handleSearchClick} disabled={search? false: true}> Search </button>
             <div className='columns'>
                 <div className='searchResults'>
                     <h2>Search Results</h2>
-                    {searchResults.map((track,index) => { return (
+                    {searchResults && searchResults.map((track,index) => { return (
                         <Track 
                             track={track} 
                             key={`track${index}`} 
