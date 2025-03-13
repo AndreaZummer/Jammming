@@ -1,6 +1,6 @@
 .playlist {
-    width: 45%;
-    background-color: #efefef4d;
+    width: 40%;
+    background-color: #85e0c093;
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
@@ -19,31 +19,15 @@
     width: 20%;
 }
 
-.playlistCover-null img{
-    display: none;
-}
-
-.playlistCover-true, .playlistCover-false, .playlistCover-null {
-    width: 13%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.playlistCover-false .cover, .playlistCover-true .cover {
-    width: 22%;
-    padding: 0; 
-    position: relative;
-    left: 30%;
-}
-
-.playlistCover-false img, .playlistCover-true img {
-    width: 80%;
-    padding: 10% 10% 3.5%;
+.coverImage {
+    margin: 1% 0 0 5%;
+    width: 3.55rem;
+    height: 3.55rem;
 }
 
 .playlistName h2, .playlistName form {
-    width: 67%;
+    width: 80%;
+    margin-left: 3%;
 }
 
 .playlistName form input {
@@ -71,47 +55,60 @@
 }
 
 .addToSpotify {
-    height: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 #addToSpotify {
-    width: 30%;
-    margin-top: 3%;
-    position: sticky;
+    width: 32%;
+    margin: 3%;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1050px) {
-    .playlistCover-false, .playlistCover-true {
-        height: 3rem;
-    }
-
     #addToSpotify {
-        width: 50%;
-        translate: 50%;
-        margin-top: .5rem;
+        width: 40%;
+        margin: .5rem;
+    }
+    #more {
+        width: 40%;
     }
 }
 
 @media only screen and (max-width: 720px) {
     .playlistName {
-        height: 15%;
+        height: 19%;
     }
-
+    .playlistName h2 {
+        width: 90%;
+    }
+    #more {
+        width: 45%;
+    }
     .playlist {
         width: 100%;
         margin: 2% 0;
     }
-
+    .settings {
+        width: 15%;
+    }
     .settings img {
         bottom: 100%;
     }
 }
+
 @media only screen and (max-width: 470px) {
     #addToSpotify {
         font-size: .8rem;
     }
-
     .settings img {
         bottom: 70%;
+    }
+    #more {
+        width: 60%;
+    }
+    .playlistName h2 {
+        font-size: 1.25rem;
     }
 }

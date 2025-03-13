@@ -18,11 +18,21 @@ function Track(props) {
     function addOrRemoveButton () {
         if (props.removeClick) {
             return (
-                <img id='remove' title='remove' onClick={handleRemove} alt='remove' src={removeButton}/>
+                <img 
+                    id='remove' 
+                    title='remove' 
+                    onClick={handleRemove} 
+                    alt='remove' 
+                    src={removeButton}/>
             )}
         else {
             return (
-                <img id='add' title='add' src={addButton} alt='add' onClick={handleAdd} />
+                <img 
+                    id='add' 
+                    title='add' 
+                    src={addButton} 
+                    alt='add' 
+                    onClick={handleAdd}/>
             )
         }
     };
@@ -39,13 +49,13 @@ function Track(props) {
 
     return (
         <div className='track'>
+            <img alt="album cover" src={props.track.album.images[2].url} />
             <div className='trackInfo'>
                 <h3>{props.track.name}</h3>
                 <h4>{addArtists()}</h4>
                 <h5>{props.track.album.name}</h5>
             </div>
-            <img alt="album cover" src={props.track.album.images[2].url} />
-            <div>
+            <div className='addOrRemoveButton'>
             {addOrRemoveButton()}
             </div>
         </div>

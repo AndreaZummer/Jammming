@@ -7,13 +7,5 @@
 
 body {
   font-family: "Poppins", serif;
-  background-image: url("./background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-@media only screen and (max-width: 1200px) {
-  body {
-    background-repeat: repeat;
-  }
+  background-color: #1a1b1a;
 }

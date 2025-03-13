@@ -17,7 +17,6 @@ function Dropdown (props) {
 
     async function autoSubmit(event) {
         const uploadImage = event.target.files[0];
-        props.playlistCoverChecker(uploadImage);
         
         function toBase64(uploadImage) {
             return new Promise((resolve, reject) => {
@@ -35,20 +34,37 @@ function Dropdown (props) {
         const base64 = await toBase64(uploadImage);
         if (uploadImage.size < 191000 & uploadImage.type === "image/jpeg") {
             localStorage.setItem('uploadImage', base64);
+        } else {
+            await props.coverDenied()
         }
     };
 
     return (
-        <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} onMouseLeave={props.leave}>
-            <ul className='menu'>
-                <li onClick={props.nameChangeHandle}><img alt='rename' src={rename}/>Rename</li>
-                <li onMouseOver={addingCoverHover} onMouseLeave={addingCoverHover2}><label htmlFor='fileUpload'><img alt='add' src={addPhoto}/>Add playlist cover</label></li>
-                <input type='file' onChange={autoSubmit} name='coverPicture' id='fileUpload' accept='image/jpeg'/>
-            </ul>
-            <ul id={`addingCoverMenu-${addingCover}`}>
-                <li>Required format: JPEG</li>
-                <li>Max-size: 191KB</li>
-            </ul>
+        <div className='menu'>
+            <div className={`dropdown-${props.visible}`} onMouseOver={props.hover} onMouseLeave={props.leave}>
+                <ul className='menu'>
+                    <li onClick={props.nameChangeHandle}>
+                        <img alt='rename' src={rename}/>Rename
+                    </li>
+                    <li onMouseOver={addingCoverHover} onMouseLeave={addingCoverHover2}>
+                        <label htmlFor='fileUpload' data-testid='fileLabel'>
+                            <img alt='add' src={addPhoto}/>Add playlist cover</label>
+                    </li>
+                    <input 
+                        type='file' 
+                        onChange={autoSubmit} 
+                        name='coverPicture' 
+                        id='fileUpload' 
+                        data-testid='fileInput'
+                        accept='image/jpeg'/>
+                </ul>
+            </div>
+            <div id={`addingCoverMenu-${addingCover}`}>
+                <ul>
+                    <li>Required format: JPEG</li>
+                    <li>Max-size: 191KB</li>
+                </ul>
+            </div>
         </div>
     )
 }
