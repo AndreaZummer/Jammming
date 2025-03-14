@@ -26,7 +26,7 @@ and tested using:
 
 This section contains a detailed description of how the application works, along with a graphical representation.
 
-1. Loggin to Spotify
+1. **Loggin to Spotify**
 
 ![Static Badge](https://img.shields.io/badge/!Note-red) For using of this app you must have a ![Static Badge](https://img.shields.io/badge/Spotify-green) account.
 
@@ -34,7 +34,7 @@ Upon the first opening of the browser window, the user is prompted to log in to 
 
 ![logging to Spotify](https://github.com/AndreaZummer/Jammming/blob/88eedbce28b668d387d3c23c9115ff9c82f9e598/screenshots/loggin.png)
 
-2. Authorization 
+2. **Authorization** 
 
 After logging in authorization is required. The authorization process uses Authorization flow with PKCE. User must grant permission for the application to display their name, profile picture, number of followers and public playlists, as well as to make changes to their Spotify account, including uploading playlist cover images, create and modify private and public playlists. 
 
@@ -44,14 +44,14 @@ After successful authorization, user is redirected to the Jammming landing page.
 
 ![jammming landing page](https://github.com/AndreaZummer/Jammming/blob/88eedbce28b668d387d3c23c9115ff9c82f9e598/screenshots/Landing-page.png)
 
-3. Creating playlist
+3. **Creating playlist**
 
 The landing page allows the user to create a playlist with any name.
 If no name is provided, the default name will be 'New Playlist'.
 
 ![jammming creating playlist](https://github.com/AndreaZummer/Jammming/blob/f5f8dc030e91598002035236ec80e014ba3b5d9c/screenshots/creating-playlist.png)
 
-4. Searching for tracks
+4. **Searching for tracks**
 
 After creating the playlist, the user can search for tracks by typing track's title or artist.
 
@@ -65,7 +65,7 @@ After search, twenty the most relevant results will be displayed in a Search Res
 
 ![jammming search results](https://github.com/AndreaZummer/Jammming/blob/f5f8dc030e91598002035236ec80e014ba3b5d9c/screenshots/First%20search.png)
 
-5. Adding tracks to Playlist
+5. **Adding tracks to Playlist**
 
 The user can choose track they want to add to playlist and make so pressing the Add button. The playlist can contain any number of tracks.
 
@@ -78,7 +78,7 @@ The user can also change the playlist name by clicking the More Options button.
 
 ![jammming rename playlist](https://github.com/AndreaZummer/Jammming/blob/507218ef3743615db70d1b508f11602bd4637eee/screenshots/Rename.png)
 
-6. Adding playlist cover image
+6. **Adding playlist cover image**
 
 The user can choose to add a custom playlist cover image by clicking the More Options button and selecting the 'Add Cover Image' option. A file upload window will appear and the user can select a custom image.
 
@@ -90,7 +90,7 @@ After a successful upload, a preview of the cover image is displayed next to the
 
 ![jammming cover image accepted](https://github.com/AndreaZummer/Jammming/blob/507218ef3743615db70d1b508f11602bd4637eee/screenshots/Cover%20changed.png)
 
-7. Adding playlist to Spotify
+7. **Adding playlist to Spotify**
 
 After clicking the 'Add to Spotify' button, the playlist is saved to user's Spotify account, and a success message is displayed.
 
