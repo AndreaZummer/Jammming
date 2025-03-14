@@ -1,7 +1,7 @@
 import Dropdown from "../src/files/components/Dropdown";
 import React from "react";
 import userEvent from "@testing-library/user-event";
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render} from "@testing-library/react";
 import { expect, vi } from "vitest";
 
 describe('Dropdown', () => {
@@ -28,21 +28,4 @@ describe('Dropdown', () => {
 
         expect(mock).toBeCalledTimes(2);
     })
-
-    /*it('should call function for uploading file on click on image for adding cover image or text next to it', async () => {
-        render(<Dropdown/>);
-
-        const text = screen.getByText(/cover/i);
-        const image = screen.getByAltText(/add/i);
-
-        const user = userEvent.setup();
-        // mock function for simulating opening dialog for uploading file
-        let mockUploadFunction = vi.fn();
-        const label = screen.getByTestId('fileLabel');
-        mockUploadFunction = fireEvent(label, 'click')
-        // clicking on text to add file
-        await user.click(text);
-
-        expect(mockUploadFunction).toBeCalledTimes(1);
-    })*/
 })

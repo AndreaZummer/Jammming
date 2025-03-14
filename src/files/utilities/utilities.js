@@ -99,7 +99,7 @@ async function requestForToken() {
     sessionStorage.setItem('refresh_token', body.refresh_token);
     console.log(sessionStorage.getItem('refresh_token'));
     localStorage.removeItem('code');
-    setInterval(() => {
+    setTimeout(() => {
       refreshToken()
     }, 3500000);
   }
@@ -111,8 +111,6 @@ async function requestForToken() {
 // Expiration handle
 async function refreshToken() {
   const refresh_token = sessionStorage.getItem('refresh_token');
-  console.log(sessionStorage.getItem('refresh_token'));
-  console.log('refreshtoken call');
   const url = "https://accounts.spotify.com/api/token";
 
   const response = await fetch(url, {
