@@ -132,6 +132,9 @@ async function refreshToken() {
   const body = await response.json();
   sessionStorage.setItem('access_token', body.access_token);
   sessionStorage.setItem('refresh_token', body.refresh_token);
+  setInterval(() => {
+    refreshToken()
+  }, 3500000);
 }
 
 // Get current user ID
