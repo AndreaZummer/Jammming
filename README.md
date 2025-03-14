@@ -100,7 +100,9 @@ After clicking the 'Add to Spotify' button, the playlist is saved to user's Spot
 
 ![Static Badge](https://img.shields.io/badge/!Important%20Notice-red)
 
-Despite installing the application, its use is only possible with the author's consent.
+Despite installing the application, its use is only possible with the **author's consent**.
+
+
 
 1. Clone the repository:
 
