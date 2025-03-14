@@ -59,7 +59,7 @@ After creating the playlist, the user can search for tracks by typing track's ti
 
 After entering the first three letters, the most relevant suggestions will appear on the screen. The user can choose one of them or enter their own search query.
 
-
+![jammming autosuggestions](https://github.com/AndreaZummer/Jammming/blob/73a51c8d2a6c0fdc65ef5fe46247792f0a942e22/screenshots/suggestions.png)
 
 After search, twenty the most relevant results will be displayed in a Search Results section.
 
@@ -84,7 +84,7 @@ The user can choose to add a custom playlist cover image by clicking the More Op
 
 ![Static Badge](https://img.shields.io/badge/!Note-red) The uploaded image must be Jpeg format with max-size: 191KB. 
 
-![jammming adding playlist cover](https://github.com/AndreaZummer/Jammming/blob/507218ef3743615db70d1b508f11602bd4637eee/screenshots/Add-playlist-cover.png)
+![jammming adding playlist cover](https://github.com/AndreaZummer/Jammming/blob/bc9d8d5daaacf7577479cb72d254780b15f16595/screenshots/Add-playlist-cover.png)
 
 After a successful upload, a preview of the cover image is displayed next to the playlist name.
 
