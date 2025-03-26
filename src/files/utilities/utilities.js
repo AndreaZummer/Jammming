@@ -1,5 +1,5 @@
 const client_id = '32fd7115babc4ea9a080fde3bb3d88df'
-const redirect_uri = 'http://localhost:3000'
+const redirect_uri = 'http://az-jammming.netlify.app'
 
 // User Authorization
 
