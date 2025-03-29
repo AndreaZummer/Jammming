@@ -18,6 +18,7 @@
     position: relative;
     top: 30%;
     opacity: .75;
+    z-index: 1;
 }
 
 #add:hover, #remove:hover {

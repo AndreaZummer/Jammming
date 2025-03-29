@@ -17,12 +17,14 @@
     border-radius: 5%;
     background-color: #ebe7e7;
     color: #000;
+    z-index: 10;
 }
 
 .dropdown-true li {
     font-size: .8rem;
     padding: 2%;
     display: flex;
+    z-index: 20;
 }
 
 .dropdown-true li:hover {
@@ -35,6 +37,7 @@
     position: relative;
     left: 2%;
     padding-right: 5%;
+    z-index: 10;
 }
 
 .dropdown-true label {
